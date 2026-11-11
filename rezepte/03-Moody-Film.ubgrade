@@ -1,0 +1,97 @@
+{
+ "format": "ubgrade",
+ "version": 3,
+ "id": "gStartMoody",
+ "name": "03 Moody Film",
+ "mode": "photo",
+ "created": "2026-11-12T00:00:00Z",
+ "app": "UBGrade 4.1.0 by gelounique",
+ "strength": 1,
+ "input": {
+  "profile": "none",
+  "display": 0,
+  "exposure": 0
+ },
+ "chain": [
+  {
+   "type": "basic",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "exposure": -0.15,
+    "contrast": 10,
+    "highlights": -35,
+    "shadows": 5,
+    "whites": 0,
+    "blacks": 0,
+    "saturation": 84,
+    "vibrance": 0
+   }
+  },
+  {
+   "type": "fade",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": 22,
+    "roll": 25,
+    "tint_h": 220,
+    "tint_s": 10
+   }
+  },
+  {
+   "type": "grading",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "sh_h": 210,
+    "sh_s": 20,
+    "sh_l": 0,
+    "md_h": 30,
+    "md_s": 0,
+    "md_l": 0,
+    "hi_h": 45,
+    "hi_s": 12,
+    "hi_l": 0,
+    "balance": 0,
+    "blending": 50
+   }
+  },
+  {
+   "type": "film",
+   "on": true,
+   "strength": 0.6,
+   "params": {
+    "stock": "ub500t",
+    "warmth": -8
+   }
+  },
+  {
+   "type": "vignette",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": -30,
+    "size": 52,
+    "roundness": 0,
+    "feather": 65,
+    "cx": 0,
+    "cy": 0
+   }
+  },
+  {
+   "type": "grain",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": 22,
+    "size": 110,
+    "color": 20,
+    "response": 60,
+    "animate": true
+   }
+  }
+ ],
+ "luts": {},
+ "thumb": ""
+}

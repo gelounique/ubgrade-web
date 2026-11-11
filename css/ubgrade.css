@@ -265,3 +265,32 @@ body.web .dll{display:inline-block;margin-top:10px;color:var(--pink);text-decora
 @media (max-width:900px){body.web .dlb em{display:none}}
 .about .legal{margin-top:14px;font-size:11px;color:var(--tx3,#6b6b74)}.about .legal a{color:var(--tx2,#a3a3ab)}
 body.web .tb{padding-right:12px}
+
+/* ---------- (?) Tutorial ---------- */
+.ib.help{position:relative}
+.ib.help.new::after{content:'';position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 0 rgba(255,182,213,.6);animation:helpPing 1.8s ease-out infinite}
+@keyframes helpPing{to{box-shadow:0 0 0 9px rgba(255,182,213,0)}}
+#tut{position:fixed;inset:0;z-index:900;display:none;pointer-events:none}
+#tut.on{display:block}
+#tut.dim{background:rgba(0,0,0,.6);pointer-events:auto}
+@keyframes tutGlow{50%{box-shadow:0 0 0 2px var(--pink),0 0 34px 6px rgba(255,182,213,.5)}}
+#tut .spot{position:fixed;border-radius:12px;box-shadow:0 0 0 2px var(--pink),0 0 22px 2px rgba(255,182,213,.35);animation:tutGlow 2s ease-in-out infinite;transition:all .32s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+#tut .card{position:fixed;width:min(380px,calc(100vw - 32px));background:#0d0d0f;border:1px solid rgba(255,182,213,.28);border-radius:16px;padding:16px 18px 14px;box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03);pointer-events:auto;transition:left .32s cubic-bezier(.2,.8,.2,1),top .32s cubic-bezier(.2,.8,.2,1);color:var(--tx);font:13px/1.55 'Instrument Sans',system-ui,sans-serif}
+#tut .hd{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+#tut .eb{font:600 9px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.24em;color:var(--pink)}
+#tut .ct{font:500 10px/1 'JetBrains Mono',ui-monospace,monospace;color:var(--tx3);margin-left:auto}
+#tut .x{background:none;border:0;color:var(--tx3);font-size:13px;cursor:pointer;padding:4px;margin:-4px -6px -4px 2px}#tut .x:hover{color:var(--tx)}
+#tut h3{font-size:19px;font-weight:650;letter-spacing:-.01em;margin:2px 0 8px}
+#tut .bd{color:var(--tx2,#c9c9cf)}#tut .bd b{color:var(--tx)}
+#tut .bd ol,#tut .bd ul{margin:8px 0 0;padding-left:18px}#tut .bd li{margin:3px 0}#tut .bd li::marker{color:var(--pink)}
+#tut .ac{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}#tut .ac:empty{display:none}
+#tut .ac .bt{border-color:rgba(255,182,213,.4);color:var(--pink)}
+#tut .ft{display:flex;align-items:center;gap:10px;margin-top:14px}
+#tut .dots{display:flex;gap:5px}#tut .dots i{width:6px;height:6px;border-radius:50%;background:#333}#tut .dots i.done{background:rgba(255,182,213,.45)}#tut .dots i.on{background:var(--pink);width:16px;border-radius:3px}
+#tut .nv{margin-left:auto;display:flex;gap:6px}
+
+/* ---------- Web: limitierte Video-Testversion ---------- */
+.wm{display:none}
+body.vtest .wm{display:flex;position:absolute;right:26px;bottom:24px;z-index:3;align-items:center;gap:8px;padding:6px 10px 6px 8px;border-radius:99px;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);pointer-events:none;font:600 9.5px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.2em;color:rgba(255,255,255,.85)}
+body.vtest .wm img{height:14px}
+body.vtest #actions a.bt{display:inline-flex;align-items:center;text-decoration:none}

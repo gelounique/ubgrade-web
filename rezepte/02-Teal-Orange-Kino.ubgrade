@@ -1,0 +1,86 @@
+{
+ "format": "ubgrade",
+ "version": 3,
+ "id": "gStartTealOrange",
+ "name": "02 Teal & Orange Kino",
+ "mode": "photo",
+ "created": "2026-11-12T00:00:00Z",
+ "app": "UBGrade 4.1.0 by gelounique",
+ "strength": 1,
+ "input": {
+  "profile": "none",
+  "display": 0,
+  "exposure": 0
+ },
+ "chain": [
+  {
+   "type": "basic",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "exposure": 0,
+    "contrast": 18,
+    "highlights": -30,
+    "shadows": 12,
+    "whites": 0,
+    "blacks": -10,
+    "saturation": 96,
+    "vibrance": 10
+   }
+  },
+  {
+   "type": "grading",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "sh_h": 195,
+    "sh_s": 24,
+    "sh_l": 0,
+    "md_h": 30,
+    "md_s": 4,
+    "md_l": 0,
+    "hi_h": 35,
+    "hi_s": 22,
+    "hi_l": 0,
+    "balance": 0,
+    "blending": 50
+   }
+  },
+  {
+   "type": "film",
+   "on": true,
+   "strength": 0.7,
+   "params": {
+    "stock": "ub250d",
+    "warmth": 6
+   }
+  },
+  {
+   "type": "vignette",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": -22,
+    "size": 52,
+    "roundness": 0,
+    "feather": 65,
+    "cx": 0,
+    "cy": 0
+   }
+  },
+  {
+   "type": "grain",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": 14,
+    "size": 110,
+    "color": 20,
+    "response": 60,
+    "animate": true
+   }
+  }
+ ],
+ "luts": {},
+ "thumb": ""
+}

@@ -35,7 +35,7 @@
     await new Promise((r) => requestAnimationFrame(r));
     (function tick(now) { const cap = ((now - t0) / minMs()) * 100; shown = Math.min(target, cap, shown + 2.6); sp.style.setProperty('--p', shown.toFixed(2)); pc.textContent = Math.round(shown) + ' %'; if (shown < 100) requestAnimationFrame(tick); })(t0);
     const charged = () => new Promise((r) => { (function w() { shown >= 100 ? r() : requestAnimationFrame(w); })(); });
-    A.args = N ? await N.args() : Object.fromEntries(new URLSearchParams(location.search)); A.host = A.args.host || null;
+    A.args = N ? await N.args() : Object.fromEntries(new URLSearchParams(location.search)); A.host = A.args.host || null; A.web = !N && !A.host;
     // Video-Edition = opened by the Premiere Pro / After Effects / DaVinci effect (Magic-Bullet-Looks workflow)
     // Foto-Edition  = standalone app and Photoshop filter
     A.edition = A.host && A.host !== 'photoshop' ? 'video' : 'photo'; setupEdition();
@@ -54,17 +54,19 @@
     const d = $('.drop .c');
     if (v) d.innerHTML = `<img src="assets/logo-un.png" alt=""><h3>Kein Frame erhalten</h3><p>${esc(HOSTS[A.host] || 'Der Host')} hat kein Bild übergeben. Playhead auf den Clip setzen und im Effekt erneut auf <b>„UBGrade öffnen…“</b> klicken.</p>`;
     else if (A.host) d.innerHTML = `<img src="assets/logo-un.png" alt=""><h3>Kein Bild erhalten</h3><p>Photoshop hat kein Bild übergeben. Bitte Filter › UNIQUEBABY › UBGrade… erneut starten.</p>`;
-    else d.innerHTML = `<img src="assets/logo-un.png" alt=""><h3>Bild reinziehen</h3><p>JPG, PNG, WebP, HEIC, TIFF … – gegradet wird in voller Auflösung, Export als JPEG oder PNG.<br>Videos gradest du direkt in <b>Premiere Pro</b>, <b>After Effects</b> oder <b>DaVinci Resolve</b> mit dem Effekt „UBGrade“.</p><button class="bt pri" id="bOpen2">Bild öffnen</button>`;
-    $('#fileIn').accept = A.host ? '.ubgrade,.cube' : 'image/*,.ubgrade,.cube';
+    else d.innerHTML = `<img src="assets/logo-un.png" alt=""><h3>Bild reinziehen</h3><p>JPG, PNG, WebP, HEIC, TIFF … – gegradet wird in voller Auflösung, Export als JPEG oder PNG.<br>Videos gradest du direkt in <b>Premiere Pro</b>, <b>After Effects</b> oder <b>DaVinci Resolve</b> mit dem Effekt „UBGrade“.<br>Neu hier? Klick oben auf <b>?</b> – das Tutorial bringt dich in 6 Schritten zum ersten Look.</p><button class="bt pri" id="bOpen2">Bild öffnen</button>`;
+    if (!N && !A.host) d.innerHTML = `<img src="assets/logo-un.png" alt=""><h3>Bild oder Video reinziehen</h3><p>Fotos (JPG, PNG, WebP …) in voller Auflösung. <b>Videos</b> (MP4, MOV, WebM) in der Testversion: die ersten ${TRIAL} Sekunden, Frame-Export mit Wasserzeichen.<br>Neu hier? Klick oben auf <b>?</b> – das Tutorial bringt dich in 6 Schritten zum ersten Look.</p><button class="bt pri" id="bOpen2">Bild / Video öffnen</button>`;
+    $('#fileIn').accept = A.host ? '.ubgrade,.cube' : !N ? 'image/*,video/*,.ubgrade,.cube' : 'image/*,.ubgrade,.cube';
     // web test version (ubgrade.uniquebaby.de): badge + download of the full Windows/Mac release
     if (!N) {
       b.classList.add('web'); const dl = window.UBGRADE_DOWNLOAD || 'https://ubgrade.uniquebaby.de/';
       const tb = $('.tb'), redo = $('#bRedo');
-      const badge = el('span', 'beta nd', 'TESTVERSION'); badge.title = 'Browser-Version zum Testen – Foto-Edition';
+      const badge = el('span', 'beta nd', 'TESTVERSION'); badge.title = `Browser-Version zum Testen – Fotos komplett, Videos limitiert (${TRIAL} s Vorschau, Frame-Export mit Wasserzeichen)`;
       const a = el('a', 'dlb nd'); a.href = dl; a.target = '_blank'; a.rel = 'noopener';
       a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span>Download <em>Windows &amp; Mac</em></span>`;
       a.title = 'UBGrade 4.1.0 – Setup für Windows + Installer für macOS, mit Plugins für Premiere Pro, After Effects, Photoshop & DaVinci Resolve';
-      tb.insertBefore(badge, $('#bOpen')); redo.after(a);
+      tb.insertBefore(badge, $('#bOpen')); ($('#bHelp') || redo).after(a);
+      $('#stage').appendChild(el('div', 'wm nd', '<img src="assets/logo-un.png" alt=""><span>UBGRADE · TESTVERSION</span>'));
       const p = $('.drop .c p'); if (p) p.insertAdjacentHTML('beforeend', `<br><a class="dll" href="${dl}" target="_blank" rel="noopener">UBGrade 4.1.0 für Windows &amp; Mac herunterladen →</a>`);
     }
     if (A.host) $('#bOpen').remove();
@@ -356,7 +358,7 @@
   function removeTool(uid) { A.st.chain = A.st.chain.filter((t) => t.uid !== uid); if (A.sel === uid) A.sel = null; commit(); renderLane(); renderTools(); }
 
   // ============================================================ media
-  function setImage(bmp, name) { stopVideo(); E.setSource(bmp); A.media = { type: 'image', name }; $('#view').classList.add('has'); A.srcVer++; A.dirty = true; queueThumbs(); queueTiles(); updateSrc(); }
+  function setImage(bmp, name) { stopVideo(); if (A.web && A.st.mode === 'video') setMode('photo'); E.setSource(bmp); A.media = { type: 'image', name }; $('#view').classList.add('has'); A.srcVer++; A.dirty = true; queueThumbs(); queueTiles(); updateSrc(); }
   function stopVideo() { if (A.video) { A.video.pause(); A.video.src = ''; A.video = null; } $('#view').classList.remove('video'); }
   function loadVideo(url, name) {
     stopVideo(); const v = el('video'); v.src = url; v.muted = true; v.playsInline = true; v.preload = 'auto'; A.video = v;
@@ -364,11 +366,23 @@
     v.addEventListener('error', () => toast('<b>Codec nicht unterstützt.</b> H.264/HEVC/VP9 gehen – ProRes, R3D & BRAW direkt aus Premiere/AE/DaVinci öffnen.', true, 6000));
     v.addEventListener('seeked', () => { E.setSource(v); A.dirty = true; updateTl(); A.srcVer++; queueThumbs(); queueTiles(); });
     v.addEventListener('ended', () => ($('#tPlay').innerHTML = ICO.play));
-    if ('requestVideoFrameCallback' in v) { const cb = () => { if (A.video !== v) return; E.setSource(v); A.dirty = true; updateTl(); v.requestVideoFrameCallback(cb); }; v.requestVideoFrameCallback(cb); }
+    v.addEventListener('timeupdate', () => trialGuard(v));
+    if ('requestVideoFrameCallback' in v) { const cb = () => { if (A.video !== v) return; trialGuard(v); E.setSource(v); A.dirty = true; updateTl(); v.requestVideoFrameCallback(cb); }; v.requestVideoFrameCallback(cb); }
+  }
+  // web test version: videos are graded live, but only the first TRIAL seconds and with a watermark
+  const TRIAL = 30;
+  const vEnd = (v) => (A.web ? Math.min(v.duration || TRIAL, TRIAL) : v.duration);
+  let trialHint = 0;
+  function trialGuard(v) {
+    if (!A.web || v.currentTime < TRIAL - 0.04) return;
+    if (!v.paused) { v.pause(); $('#tPlay').innerHTML = ICO.play; }
+    if (v.currentTime > TRIAL) v.currentTime = TRIAL - 0.04;
+    if (Date.now() - trialHint > 5000) { trialHint = Date.now(); toast(`<b>Testversion:</b> Videos bis ${TRIAL} Sekunden. Ganze Clips gradest du mit UBGrade in Premiere Pro, After Effects &amp; DaVinci Resolve.`, false, 5200); }
   }
   const VIDEO_RX = /\.(mp4|mov|m4v|webm|mkv|avi|mxf|r3d|braw|mts)$/i;
   function mediaBlocked(name, isVideo) {
     if (A.host) { toast(`<b>${esc(name)}</b>: hier wird der Frame aus ${esc(HOSTS[A.host])} gegradet – nur .ubgrade &amp; .cube importierbar`, true, 4200); return true; }
+    if (isVideo && A.web) return false;
     if (isVideo) { toast('<b>UBGrade App = Foto-Edition.</b> Videos gradest du direkt in Premiere Pro, After Effects oder DaVinci Resolve mit dem Effekt „UBGrade“.', true, 6000); return true; }
     return false;
   }
@@ -377,7 +391,9 @@
     try {
       if (n.endsWith('.ubgrade')) return importDoc(JSON.parse(await f.text()));
       if (n.endsWith('.cube')) return setLut(f.name, await f.text());
-      if (mediaBlocked(f.name, f.type.startsWith('video/') || VIDEO_RX.test(n))) return;
+      const isVid = f.type.startsWith('video/') || VIDEO_RX.test(n);
+      if (mediaBlocked(f.name, isVid)) return;
+      if (isVid) return loadVideo(URL.createObjectURL(f), f.name);
       setImage(await createImageBitmap(f, { imageOrientation: 'from-image', premultiplyAlpha: 'none' }), f.name);
     } catch (e) { toast('<b>Datei nicht lesbar:</b> ' + esc(f.name), true); }
   }
@@ -394,7 +410,12 @@
     applyDoc(A.lib.find((x) => x.name === d.name) || d);
   }
   function updateSrc() { if (A.host || !A.media) return; $('#src').innerHTML = `<b>${esc(A.media.name)}</b> · ${E.srcW}×${E.srcH}`; }
-  function setMode() { A.st.mode = A.edition; $('#mode span').textContent = A.edition === 'video' ? 'VIDEO · ' + (HOSTS[A.host] || '').toUpperCase() : A.host ? 'FOTO · PHOTOSHOP' : 'FOTO'; buildActions(); A.dirty = true; }
+  function setMode(m) {
+    const vt = !!A.web && (m === 'video' || (m == null && A.st.mode === 'video'));   // web: limited video test
+    A.st.mode = vt ? 'video' : A.edition; document.body.classList.toggle('vtest', vt);
+    $('#mode span').textContent = vt ? 'VIDEO · TESTVERSION' : A.edition === 'video' ? 'VIDEO · ' + (HOSTS[A.host] || '').toUpperCase() : A.host ? 'FOTO · PHOTOSHOP' : 'FOTO';
+    buildActions(); A.dirty = true;
+  }
 
   // ============================================================ history
   function pushUndo(init) { const s = JSON.stringify(A.st); if (A.undo[A.undo.length - 1] === s) return; A.undo.push(s); if (A.undo.length > 150) A.undo.shift(); if (!init) A.redo = []; $('#bUndo').disabled = A.undo.length < 2; $('#bRedo').disabled = !A.redo.length; }
@@ -410,6 +431,11 @@
     if (A.host) {
       const x = el('button', 'ok', ICO.x); x.title = 'Abbrechen (Esc)'; x.onclick = () => N.quit(1);
       const y = el('button', 'ok y', ICO.check); y.title = 'OK – Grade übernehmen (Enter)'; y.onclick = hostOK; a.append(x, y); return;
+    }
+    if (document.body.classList.contains('vtest')) {
+      const f = el('button', 'bt exp', 'Frame exportieren'); f.title = 'Aktuellen Frame als JPEG (max. 1920 px, mit Wasserzeichen)'; f.onclick = () => exportImage('jpg', 1920);
+      const v = el('a', 'bt pri exp', 'Vollversion holen'); v.href = window.UBGRADE_DOWNLOAD || 'https://ubgrade.uniquebaby.de/'; v.target = '_blank'; v.rel = 'noopener'; v.title = 'Ganze Videos graden: UBGrade für Premiere Pro, After Effects & DaVinci Resolve (Windows & Mac)';
+      a.append(f, v); return;
     }
     const e = el('button', 'bt pri exp', 'Exportieren'); e.onclick = exportDialog; a.append(e);
   }
@@ -436,9 +462,20 @@
   async function exportImage(fmt, size) {
     if (!E.hasSource()) return; busy(true, 'EXPORT');
     try { let w = E.srcW, h = E.srcH; const s = Math.min(1, (size === 'orig' ? E.maxTex : +size) / Math.max(w, h)); w = Math.round(w * s); h = Math.round(h * s);
-      const c = E.renderToCanvas(UB.renderChain(A.st), w, h), b = await new Promise((r) => c.toBlob(r, fmt === 'png' ? 'image/png' : 'image/jpeg', 0.95));
+      let c = E.renderToCanvas(UB.renderChain(A.st), w, h); if (A.web && A.st.mode === 'video') c = await watermark(c);
+      const b = await new Promise((r) => c.toBlob(r, fmt === 'png' ? 'image/png' : 'image/jpeg', 0.95));
       const p = await saveFile(safe((A.media.name || 'bild').replace(/\.[^.]+$/, '') + '_UBGrade') + (fmt === 'png' ? '.png' : '.jpg'), b); if (p) toast('<b>Exportiert</b> ' + w + '×' + h);
     } finally { busy(false); }
+  }
+  async function watermark(src) {
+    const c = el('canvas'); c.width = src.width; c.height = src.height; const g = c.getContext('2d'); g.drawImage(src, 0, 0);
+    const u = Math.max(c.width, c.height) / 100, logo = new Image(); logo.src = 'assets/logo-un.png'; try { await logo.decode(); } catch (e) {}
+    g.save(); g.globalAlpha = 0.16; g.translate(c.width / 2, c.height / 2); g.rotate(-Math.PI / 12); g.fillStyle = '#fff'; g.font = `700 ${u * 3.4}px 'Instrument Sans', system-ui, sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle';
+    for (let y = -c.height; y <= c.height; y += u * 16) for (let x = -c.width; x <= c.width; x += u * 46) g.fillText('UBGRADE · TESTVERSION', x + ((y / (u * 16)) & 1) * u * 23, y);
+    g.restore(); g.save(); g.globalAlpha = 0.85; const lh = u * 3.2;
+    if (logo.naturalWidth) g.drawImage(logo, c.width - u * 2 - lh * logo.naturalWidth / logo.naturalHeight - u * 21, c.height - u * 2 - lh, lh * logo.naturalWidth / logo.naturalHeight, lh);
+    g.fillStyle = '#fff'; g.font = `600 ${u * 1.5}px 'JetBrains Mono', ui-monospace, monospace`; g.textAlign = 'right'; g.textBaseline = 'middle'; g.fillText('UBGRADE.UNIQUEBABY.DE', c.width - u * 2, c.height - u * 2 - lh / 2); g.restore();
+    return c;
   }
   async function exportLut() { const p = await saveFile(safe('UBGrade_' + A.st.name) + '.cube', UB.writeCube(E.bakeLUT(UB.renderChain(A.st), 33), 33, 'UBGrade ' + A.st.name)); if (p) toast('<b>LUT exportiert</b> – räumliche Tools (Optik, Korn …) sind in LUTs nicht enthalten'); }
   async function saveFile(name, data) {
@@ -462,7 +499,7 @@
 
   // ============================================================ viewer loop
   function tcode(t) { const f = Math.round(A.fps) || 25, n = Math.floor(t * f + 1e-6); return [Math.floor(n / f / 3600), Math.floor(n / f / 60) % 60, Math.floor(n / f) % 60, n % f].map((v) => String(v).padStart(2, '0')).join(':'); }
-  function updateTl() { const v = A.video; if (!v) return; const p = v.duration ? v.currentTime / v.duration : 0; $('#sFill').style.width = p * 100 + '%'; $('#sKnob').style.left = p * 100 + '%'; $('#tc').textContent = tcode(v.currentTime); }
+  function updateTl() { const v = A.video; if (!v) return; const d = vEnd(v), p = d ? Math.min(1, v.currentTime / d) : 0; $('#sFill').style.width = p * 100 + '%'; $('#sKnob').style.left = p * 100 + '%'; $('#tc').textContent = tcode(v.currentTime); }
   let lastScope = 0;
   function loop() {
     requestAnimationFrame(loop); if (!E || !E.hasSource() || !A.dirty) return; A.dirty = false;
@@ -507,8 +544,8 @@
     });
     new ResizeObserver(() => (A.dirty = true)).observe($('#stage'));
     // timeline
-    $('#tPlay').onclick = () => { const v = A.video; if (!v) return; if (v.paused) { v.play(); $('#tPlay').innerHTML = ICO.pause; } else { v.pause(); $('#tPlay').innerHTML = ICO.play; A.srcVer++; queueThumbs(); queueTiles(); } };
-    const sc = $('#scrub'); let sg = false; const seek = (e) => { const v = A.video; if (!v || !v.duration) return; const r = sc.getBoundingClientRect(); v.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * v.duration; };
+    $('#tPlay').onclick = () => { const v = A.video; if (!v) return; if (v.paused) { if (A.web && v.currentTime >= TRIAL - 0.1) v.currentTime = 0; v.play(); $('#tPlay').innerHTML = ICO.pause; } else { v.pause(); $('#tPlay').innerHTML = ICO.play; A.srcVer++; queueThumbs(); queueTiles(); } };
+    const sc = $('#scrub'); let sg = false; const seek = (e) => { const v = A.video; if (!v || !v.duration) return; const r = sc.getBoundingClientRect(); v.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * vEnd(v); };
     sc.onpointerdown = (e) => { sg = true; sc.setPointerCapture(e.pointerId); seek(e); }; sc.onpointermove = (e) => sg && seek(e); sc.onpointerup = () => (sg = false);
     // file drag & drop
     const vw = $('#view'); let n = 0;
@@ -527,10 +564,10 @@
       else if (e.key === '\\') $('#bBypass').click(); else if (k === 's') $('#bSplit').click(); else if (k === 'f') $('#bFalse').click();
       else if ((e.key === 'Delete' || e.key === 'Backspace') && A.sel && A.sel !== 'in' && A.sel !== 'out') removeTool(A.sel);
       else if (e.key === ' ' && A.video) { e.preventDefault(); $('#tPlay').click(); }
-      else if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && A.video) { A.video.pause(); A.video.currentTime += (e.key === 'ArrowLeft' ? -1 : 1) / A.fps; }
+      else if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && A.video) { A.video.pause(); A.video.currentTime = Math.max(0, Math.min(vEnd(A.video), A.video.currentTime + (e.key === 'ArrowLeft' ? -1 : 1) / A.fps)); }
     });
   }
 
-  UB.app = { A, get engine() { return E; }, setImage, addTool, save, blob: () => blob(A.st, UB.renderChain(A.st)) };
+  UB.app = { A, get engine() { return E; }, setImage, addTool, save, importDoc, blob: () => blob(A.st, UB.renderChain(A.st)) };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })(window.UB = window.UB || {});

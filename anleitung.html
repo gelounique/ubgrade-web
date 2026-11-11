@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Grading für Anfänger – UBGrade Anleitung</title>
+<meta name="description" content="In 10 Minuten zum ersten richtig guten Look: Die Einsteiger-Anleitung zu UBGrade by gelounique – Reihenfolge, Werte, Rezepte, typische Fehler.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Color Grading für Anfänger – UBGrade">
+<meta property="og:description" content="In 10 Minuten zum ersten richtig guten Look. Mit Rezepten zum Nachbauen.">
+<meta property="og:image" content="https://ubgrade.uniquebaby.de/assets/og.png">
+<link rel="icon" href="assets/icon-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+:root{--bg:#000;--card:#0c0c0e;--line:#1d1d22;--tx:#f2f2f4;--tx2:#b5b5bd;--tx3:#75757e;--pink:#FFB6D5;--mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--pink)}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:14px;height:58px;max-width:1100px}
+nav img{height:26px}nav b{font-weight:650;letter-spacing:-.01em}nav .sp{flex:1}
+nav a.l{color:var(--tx2);text-decoration:none;font-size:14px}nav a.l:hover{color:var(--tx)}
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:99px;background:var(--pink);color:#111;font-weight:600;font-size:14px;text-decoration:none;border:0;cursor:pointer;white-space:nowrap}
+.btn.o{background:transparent;color:var(--tx);border:1px solid #333}.btn.o:hover{border-color:var(--pink)}
+.btn.s{height:32px;padding:0 13px;font-size:13px}
+.eb{font:600 11px/1 var(--mono);letter-spacing:.26em;color:var(--pink);text-transform:uppercase}
+header.hero{padding:84px 0 40px}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.02;letter-spacing:-.035em;margin:16px 0 18px;font-weight:650}
+h1 em{font-style:normal;color:var(--pink)}
+.lead{font-size:19px;color:var(--tx2);max-width:640px;margin:0 0 26px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.meta{font:500 12px var(--mono);color:var(--tx3);letter-spacing:.06em;margin-top:22px}
+section{padding:46px 0;border-top:1px solid var(--line)}
+h2{font-size:30px;letter-spacing:-.025em;margin:10px 0 14px;line-height:1.15}
+h3{font-size:19px;margin:0 0 6px;letter-spacing:-.01em}
+p{color:var(--tx2);margin:0 0 14px}p b,li b{color:var(--tx)}
+.ba{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin:30px 0 8px;user-select:none;touch-action:none;cursor:ew-resize;background:#111}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ba .af{clip-path:inset(0 0 0 var(--x,50%))}
+.ba .h{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:var(--pink);transform:translateX(-1px)}
+.ba .h::after{content:'';position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px;border-radius:50%;background:var(--pink);box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.ba .t{position:absolute;top:14px;font:600 10px/1 var(--mono);letter-spacing:.2em;background:rgba(0,0,0,.55);padding:7px 10px;border-radius:99px}
+.ba .t.l{left:14px}.ba .t.r{right:14px;color:var(--pink)}
+.cap{font:500 12px var(--mono);color:var(--tx3)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:22px 0 6px;counter-reset:f}
+.flow div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 12px;counter-increment:f}
+.flow div::before{content:counter(f);display:block;font:600 11px var(--mono);color:var(--pink);margin-bottom:6px}
+.flow b{display:block;font-size:15px}.flow span{font-size:12.5px;color:var(--tx3);line-height:1.4;display:block;margin-top:2px}
+.step{display:grid;grid-template-columns:54px 1fr;gap:18px;margin:30px 0}
+.step .n{width:54px;height:54px;border-radius:16px;border:1px solid rgba(255,182,213,.35);display:grid;place-items:center;font:600 18px var(--mono);color:var(--pink)}
+.tool{display:inline-block;font:600 11.5px/1 var(--mono);letter-spacing:.06em;background:#17171b;border:1px solid #26262c;border-radius:6px;padding:4px 7px;color:var(--tx);white-space:nowrap}
+table{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:14.5px}
+td,th{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 10.5px var(--mono);letter-spacing:.16em;color:var(--tx3);text-transform:uppercase}
+td:first-child{color:var(--tx);font-weight:600;white-space:nowrap}td.v{font-family:var(--mono);color:var(--pink);white-space:nowrap;font-size:13.5px}td{color:var(--tx2)}
+.tip{background:linear-gradient(180deg,rgba(255,182,213,.08),rgba(255,182,213,.02));border:1px solid rgba(255,182,213,.22);border-radius:14px;padding:14px 16px;margin:16px 0;color:var(--tx2);font-size:15px}
+.tip b:first-child{color:var(--pink)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card h3{display:flex;align-items:center;gap:10px}.card h3 i{width:12px;height:12px;border-radius:50%;flex:none}
+.card p{font-size:14.5px;margin-bottom:10px}
+.card ul{margin:0 0 14px;padding-left:18px;color:var(--tx2);font-size:14px}.card li{margin:2px 0}.card li::marker{color:var(--pink)}
+.mist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.mist div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.mist b{display:block;margin-bottom:4px}.mist span{color:var(--tx2);font-size:14.5px}
+kbd{font:600 12px var(--mono);background:#17171b;border:1px solid #2a2a30;border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--tx)}
+.keys{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;margin-top:12px}
+.keys div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:8px 0;color:var(--tx2);font-size:14.5px}
+ol.v{padding-left:20px;color:var(--tx2)}ol.v li{margin:6px 0}ol.v li::marker{color:var(--pink);font-family:var(--mono)}
+.cta{text-align:center;padding:70px 0 90px}
+.cta h2{font-size:38px}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--tx3);font-size:13px}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;max-width:1100px}footer a{color:var(--tx3)}
+@media print{@page{size:A4;margin:14mm 0 12mm}
+:root{--bg:#fff;--card:#f6f6f8;--line:#e6e6ea;--tx:#0b0b0d;--tx2:#3a3a42;--tx3:#7a7a84;--pink:#d9488a}
+html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}nav{display:none}header.hero{padding-top:0}section{padding:24px 0}
+.btn{background:#0b0b0d;color:#fff}.btn.o{background:#fff;color:#0b0b0d;border-color:#ccc}.tool,kbd{background:#f0f0f3;border-color:#dcdce2}.ba .t{background:rgba(0,0,0,.6);color:#fff}.ba .t.r{color:#FFB6D5}.ba .h,.ba .h::after{background:#FFB6D5}
+.tip{background:#fdf0f6;border-color:#f3c3da}footer img{filter:invert(1)}.flow div::before{color:var(--pink)}.cta img{filter:none}
+.card,.mist div,.tip,table,.keys,.flow,.cta,.step .n,ol.v li{break-inside:avoid}h2,h3,.eb{break-after:avoid}.cta{padding:30px 0}}
+@media (max-width:760px){.flow{grid-template-columns:1fr 1fr}.cards,.mist,.keys{grid-template-columns:1fr}.step{grid-template-columns:1fr}nav a.l{display:none}header.hero{padding-top:52px}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><img src="assets/logo-ub.png" alt="UB"><b>UBGrade</b><span class="eb" style="font-size:9.5px">ANLEITUNG</span><span class="sp"></span><a class="l" href="#reihenfolge">Reihenfolge</a><a class="l" href="#rezepte">Rezepte</a><a class="l" href="#fehler">Fehler</a><a class="l" href="#video">Video</a><a class="btn s" href="./">Jetzt testen</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eb">Color Grading für Anfänger</div>
+  <h1>In 10 Minuten zum ersten <em>richtig guten</em> Look.</h1>
+  <p class="lead">Kein Fachchinesisch, keine 40 Regler auf einmal. Du lernst die eine Reihenfolge, die Profis immer benutzen – und bekommst Werte, die sofort funktionieren.</p>
+  <div class="row"><a class="btn" href="./?tutorial=1">Interaktives Tutorial starten</a><a class="btn o" href="rezepte/UBGrade-Starter-Looks.zip" download>4 Starter-Looks laden (.ubgrade)</a></div>
+  <div class="ba" id="ba"><img src="guide/before.jpg" alt="Vorher"><img class="af" src="guide/after.jpg" alt="Nachher"><span class="t l">VORHER</span><span class="t r">NACHHER</span><div class="h"></div></div>
+  <div class="cap">← ziehen → · gleiches Foto, 5 Tools, unter 3 Minuten</div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eb">Grundlagen</div>
+  <h2>Was ist Color Grading überhaupt?</h2>
+  <p>Zwei Dinge, die gern verwechselt werden:</p>
+  <p><b>Korrektur</b> = das Bild „richtig“ machen. Helligkeit stimmt, Weiß ist weiß, nichts ist ausgebrannt. Das ist das Fundament.<br>
+  <b>Grading</b> = dem Bild eine <b>Stimmung</b> geben. Warm und nostalgisch, kühl und kinomäßig, düster und filmisch. Das ist der Teil, der Spaß macht.</p>
+  <div class="tip"><b>Die wichtigste Regel:</b> Erst korrigieren, dann graden. Ein Look auf einem falsch belichteten Bild sieht immer billig aus – egal wie gut der Look ist.</div>
+  <p>In UBGrade baust du beides als <b>Chain</b>: Tools liegen unten in einer Reihe und wirken von links nach rechts. Jedes Tool kannst du an-/ausschalten, verschieben, löschen – und mit <kbd>Strg</kbd>+<kbd>Z</kbd> ist alles rückgängig. Du kannst nichts kaputt machen.</p>
+</div></section>
+
+<section id="reihenfolge"><div class="wrap">
+  <div class="eb">Die goldene Reihenfolge</div>
+  <h2>5 Schritte. Immer gleich. Bei jedem Bild.</h2>
+  <div class="flow">
+    <div><b>Licht</b><span>Belichtung, Lichter, Tiefen, Kontrast</span></div>
+    <div><b>Weiß</b><span>Farbstich raus, Haut natürlich</span></div>
+    <div><b>Look</b><span>Stimmung über Split-Toning</span></div>
+    <div><b>Film</b><span>Film-Charakter, Korn, Vignette</span></div>
+    <div><b>Dosieren</b><span>Vergleichen, Stärke runter</span></div>
+  </div>
+
+  <div class="step"><div class="n">1</div><div>
+    <h3>Licht zuerst – <span class="tool">Basis-Ton</span></h3>
+    <p>Klick rechts in der Kategorie <b>Licht</b> auf <b>Basis-Ton</b>. Geh die Regler genau in dieser Reihenfolge durch:</p>
+    <table><tr><th>Regler</th><th>Startwert</th><th>Was er macht</th></tr>
+      <tr><td>Belichtung</td><td class="v">± nach Gefühl</td><td>Gesamthelligkeit. So lange, bis dein Motiv gut zu sehen ist.</td></tr>
+      <tr><td>Lichter</td><td class="v">−20 … −40</td><td>Holt hellen Himmel und ausgebrannte Stellen zurück.</td></tr>
+      <tr><td>Tiefen</td><td class="v">+10 … +25</td><td>Öffnet dunkle Bereiche, ohne das Bild flau zu machen.</td></tr>
+      <tr><td>Kontrast</td><td class="v">+10 … +20</td><td>Gibt Punch, nachdem Lichter &amp; Tiefen gezähmt sind.</td></tr>
+      <tr><td>Schwarz</td><td class="v">−5 … −15</td><td>Sattes Schwarz. Nicht übertreiben, sonst „säuft“ Detail ab.</td></tr>
+      <tr><td>Dynamik</td><td class="v">+10 … +20</td><td>Schonende Sättigung – blasse Farben mehr, Haut kaum.</td></tr>
+    </table>
+    <div class="tip"><b>Tipp:</b> Nimm <b>Dynamik</b> statt <b>Sättigung</b>. Sättigung pusht alles gleich stark – Gesichter werden schnell orange.</div>
+  </div></div>
+
+  <div class="step"><div class="n">2</div><div>
+    <h3>Weiß soll weiß sein – <span class="tool">Weißabgleich</span></h3>
+    <p><b>Temperatur</b> nach links = kühler/blauer, nach rechts = wärmer/oranger. <b>Tönung</b> korrigiert Grün- oder Magentastiche (typisch bei Neonlicht und Handy-Fotos).</p>
+    <p>Woran du es erkennst: Schau auf etwas, das in echt weiß oder grau ist – ein T-Shirt, eine Wand, Wolken. Sieht es neutral aus? Passt. Und: <b>Haut</b> muss natürlich wirken, nicht gelb und nicht rosa.</p>
+  </div></div>
+
+  <div class="step"><div class="n">3</div><div>
+    <h3>Deine Stimmung – <span class="tool">Split-Toning</span></h3>
+    <p>Jetzt wird's kreativ. Split-Toning färbt <b>dunkle</b> und <b>helle</b> Bereiche getrennt ein. Der Kino-Klassiker ist <b>Teal &amp; Orange</b>: kühle Schatten, warme Lichter – Haut leuchtet, Hintergrund tritt zurück.</p>
+    <table><tr><th>Regler</th><th>Wert</th><th></th></tr>
+      <tr><td>Tiefen Farbton</td><td class="v">≈ 195–210</td><td>Blau-Grün</td></tr>
+      <tr><td>Tiefen Sättigung</td><td class="v">15 … 25</td><td>Klein anfangen!</td></tr>
+      <tr><td>Lichter Farbton</td><td class="v">≈ 30–45</td><td>Orange/Gold</td></tr>
+      <tr><td>Lichter Sättigung</td><td class="v">15 … 25</td><td></td></tr>
+      <tr><td>Balance</td><td class="v">−20 … +20</td><td>Verschiebt, wo „Schatten“ aufhört und „Licht“ anfängt.</td></tr>
+    </table>
+    <div class="tip"><b>Faustregel:</b> Sättigungswerte über 35 sehen fast immer nach Instagram-Filter 2014 aus. Kleine Werte = hochwertig.</div>
+  </div></div>
+
+  <div class="step"><div class="n">4</div><div>
+    <h3>Filmgefühl – <span class="tool">Film-Charakter</span> <span class="tool">Korn</span> <span class="tool">Vignette</span></h3>
+    <p><b>Film-Charakter</b> gibt deinem Bild die Gradation eines echten Films. Für den Start: <b>UB Daylight 250</b> bei Tageslicht, <b>UB Tungsten 500</b> für Abends/Innen, <b>Portrait 400 Soft</b> für Menschen. Tool-Stärke (der kleine Regler am Tool) auf 60–80 %.</p>
+    <p><b>Korn</b> 10–20 macht aus „digital glatt“ „gefilmt“. <b>Vignette</b> −15 bis −30 dunkelt die Ränder ab und lenkt den Blick in die Mitte. Optional für Highlights mit Glow: <b>Halation</b> (roter Schimmer um Lichter) oder <b>Diffusion</b> (weicher Mist-Filter).</p>
+  </div></div>
+
+  <div class="step"><div class="n">5</div><div>
+    <h3>Vergleichen &amp; dosieren – <span class="tool">⊘ Vorher/Nachher</span> <span class="tool">Stärke</span></h3>
+    <p>Drück <kbd>\</kbd> für Vorher/Nachher oder <kbd>S</kbd> für die Split-Ansicht. Nach 10 Minuten Grading gewöhnen sich deine Augen an jeden Look – der Vergleich holt dich zurück.</p>
+    <p>Wirkt's zu viel? Zieh unten die <b>Stärke</b> auf <b>60–80 %</b>. Der unterschätzteste Profi-Trick überhaupt: Ein guter Look verbessert das Bild – er übertönt es nicht.</p>
+    <p>Zufrieden? <b>Speichern</b> (Diskette unten oder <kbd>Strg</kbd>+<kbd>S</kbd>) – dein Look landet als <b>UBGrade</b> links in der Bibliothek und funktioniert in allen Programmen.</p>
+  </div></div>
+</div></section>
+
+<section id="rezepte"><div class="wrap">
+  <div class="eb">Rezepte zum Nachbauen</div>
+  <h2>4 Looks, die einfach funktionieren.</h2>
+  <p>Lade sie als Datei und zieh sie in UBGrade (oder Import-Button links oben) – oder bau sie mit den Werten selbst nach. Nachbauen lernt mehr, versprochen.</p>
+  <div class="cards">
+    <div class="card"><h3><i style="background:#e9e4dc"></i>Clean Natural</h3><p>Der „nur besser“-Look. Perfekt für Produkte, Portraits, Alltag.</p>
+      <ul><li>Basis-Ton: Kontrast +12, Lichter −25, Tiefen +15, Weiß +5, Schwarz −5, Dynamik +15</li><li>Vignette −15</li></ul>
+      <a class="btn o s" href="rezepte/01-Clean-Natural.ubgrade" download>.ubgrade laden</a></div>
+    <div class="card"><h3><i style="background:linear-gradient(90deg,#2f8f9a,#f0a35a)"></i>Teal &amp; Orange Kino</h3><p>Der Blockbuster-Klassiker. Haut leuchtet, Rest wird kühl.</p>
+      <ul><li>Basis-Ton: Kontrast +18, Lichter −30, Tiefen +12, Schwarz −10, Dynamik +10</li><li>Split-Toning: Tiefen 195 / 24 · Lichter 35 / 22</li><li>Film-Charakter UB Daylight 250 @ 70 % · Vignette −22 · Korn 14</li></ul>
+      <a class="btn o s" href="rezepte/02-Teal-Orange-Kino.ubgrade" download>.ubgrade laden</a></div>
+    <div class="card"><h3><i style="background:linear-gradient(90deg,#24303d,#7d7466)"></i>Moody Film</h3><p>Matt, gedämpft, nachdenklich. Für Streets, Regen, Abendstimmung.</p>
+      <ul><li>Basis-Ton: Belichtung −0.15, Kontrast +10, Lichter −35, Sättigung 84</li><li>Matte: Matte Schwarz 22, Lichter abrunden 25</li><li>Split-Toning: Tiefen 210 / 20 · Lichter 45 / 12</li><li>UB Tungsten 500 @ 60 % · Vignette −30 · Korn 22</li></ul>
+      <a class="btn o s" href="rezepte/03-Moody-Film.ubgrade" download>.ubgrade laden</a></div>
+    <div class="card"><h3><i style="background:linear-gradient(90deg,#f6b25a,#ff8a5c)"></i>Golden Hour Film</h3><p>Warm, weich, glühend. Sonnenuntergang, Hochzeit, Sommer.</p>
+      <ul><li>Basis-Ton: Kontrast +22, Lichter −30, Tiefen +18, Dynamik +22</li><li>Split-Toning: Tiefen 205 / 28 · Lichter 38 / 26</li><li>UB Daylight 250 (Wärme +18) · Halation 38 · Diffusion 22</li><li>Vignette −28 · Korn 18</li></ul>
+      <a class="btn o s" href="rezepte/04-Golden-Hour-Film.ubgrade" download>.ubgrade laden</a></div>
+  </div>
+  <div class="tip"><b>Wichtig:</b> Ein Rezept ist ein Startpunkt, kein Endergebnis. Jedes Foto ist anders belichtet – pass danach immer <b>Belichtung</b> und <b>Weißabgleich</b> an dein Bild an.</div>
+</div></section>
+
+<section id="fehler"><div class="wrap">
+  <div class="eb">Die 6 häufigsten Anfängerfehler</div>
+  <h2>Und wie du sie vermeidest.</h2>
+  <div class="mist">
+    <div><b>Zu viel Sättigung</b><span>Wenn's „knallt“, ist es meistens zu viel. Dynamik statt Sättigung, Split-Toning unter 30.</span></div>
+    <div><b>Orange Haut</b><span>Erst Weißabgleich, dann Look. Im HSL-Tool Orange-Sättigung leicht runter rettet fast alles.</span></div>
+    <div><b>Look vor Korrektur</b><span>Immer Licht → Weiß → Look. Nie andersrum.</span></div>
+    <div><b>Schwarz komplett zu</b><span>Wenn in dunklen Bereichen nur noch Fläche ist, Schwarz zurücknehmen oder etwas Matte drauf.</span></div>
+    <div><b>Nie verglichen</b><span>Alle paar Minuten <kbd>\</kbd> drücken. Deine Augen lügen nach einer Weile.</span></div>
+    <div><b>Stärke auf 100 %</b><span>Fertigen Look einfach mal auf 70 % ziehen. Meistens ist das die bessere Version.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eb">Bonus: Scopes lesen</div>
+  <h2>Die Kurven unter dem Bild – kurz erklärt.</h2>
+  <p>Unter dem Bild siehst du die <b>Scopes</b>. Sie zeigen dir objektiv, was deine Augen vielleicht übersehen:</p>
+  <ol class="v">
+    <li><b>Waveform</b> – unten = schwarz, oben = weiß. Klebt viel am oberen Rand? Ausgebrannt → Lichter runter. Klebt viel unten? Abgesoffen → Tiefen hoch.</li>
+    <li><b>RGB Parade</b> – Rot, Grün, Blau nebeneinander. Bei etwas Grauem/Weißem sollten die drei ungefähr gleich hoch sein. Ist Blau höher? Bild ist zu kühl.</li>
+    <li><b>Vektorskop</b> – zeigt, wie bunt und in welche Richtung. Hauttöne liegen fast immer auf einer Linie Richtung Gelb-Rot (oben links). Weit nach außen = sehr gesättigt.</li>
+  </ol>
+  <p>Tipp: Drück <kbd>F</kbd> für <b>False Color</b> – zeigt Belichtungszonen in Farbe. Rot = ausgebrannt, Blau/Lila = sehr dunkel.</p>
+</div></section>
+
+<section id="video"><div class="wrap">
+  <div class="eb">Für Video</div>
+  <h2>Premiere Pro, After Effects &amp; DaVinci Resolve.</h2>
+  <p>Mit der Vollversion arbeitest du direkt in deinem Schnittprogramm – genau wie bei Magic Bullet Looks:</p>
+  <ol class="v">
+    <li>Effekt <b>UBGrade</b> aus <b>Effekte › UNIQUEBABY</b> auf den Clip ziehen (oder auf eine Einstellungsebene über mehreren Clips).</li>
+    <li>Playhead auf einen typischen Frame stellen – am besten mit Gesicht – und im Effekt auf <b>„UBGrade öffnen…“</b> klicken.</li>
+    <li>Look nach den 5 Schritten oben bauen. Du siehst genau diesen Frame.</li>
+    <li><b>OK ✓</b> klicken – der Grade sitzt auf dem ganzen Clip. Später nochmal öffnen = weiter feilen.</li>
+  </ol>
+  <div class="tip"><b>Mehrere Clips, ein Look:</b> Look einmal <b>speichern</b>, dann bei jedem weiteren Clip in der Bibliothek anklicken und nur noch <b>Belichtung</b> und <b>Weißabgleich</b> pro Clip anpassen. So sieht dein ganzes Video wie aus einem Guss aus.</div>
+  <p>In der <a href="./">Web-Testversion</a> kannst du Videos auch ausprobieren – die ersten 30 Sekunden, Frame-Export mit Wasserzeichen.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eb">Tastenkürzel</div>
+  <h2>Schneller arbeiten.</h2>
+  <div class="keys">
+    <div><span>Vorher / Nachher</span><kbd>\</kbd></div><div><span>Split-Ansicht</span><kbd>S</kbd></div>
+    <div><span>False Color</span><kbd>F</kbd></div><div><span>Rückgängig / Wiederholen</span><span><kbd>Strg</kbd> <kbd>Z</kbd> / <kbd>Y</kbd></span></div>
+    <div><span>Als UBGrade speichern</span><span><kbd>Strg</kbd> <kbd>S</kbd></span></div><div><span>Datei öffnen</span><span><kbd>Strg</kbd> <kbd>O</kbd></span></div>
+    <div><span>Ausgewähltes Tool löschen</span><kbd>Entf</kbd></div><div><span>Tutorial</span><kbd>F1</kbd></div>
+    <div><span>Video Play / Pause</span><kbd>Leertaste</kbd></div><div><span>OK im Plugin / Abbrechen</span><span><kbd>Enter</kbd> / <kbd>Esc</kbd></span></div>
+  </div>
+  <p class="cap" style="margin-top:10px">Auf dem Mac statt <kbd>Strg</kbd> einfach <kbd>⌘</kbd>.</p>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <img src="assets/icon-256.png" alt="" style="width:88px;border-radius:24%">
+  <h2>Genug gelesen. Ab ans Bild.</h2>
+  <p>Das interaktive Tutorial in der App zeigt dir jeden Schritt direkt am richtigen Regler.</p>
+  <div class="row" style="justify-content:center"><a class="btn" href="./?tutorial=1">Tutorial im Browser starten</a><a class="btn o" id="dl" href="https://github.com/gelounique/ubgrade-web/releases/latest">Download Windows &amp; Mac</a></div>
+</div></section>
+
+<footer><div class="wrap"><img src="assets/logo-un.png" alt="" style="height:18px;opacity:.7"><span>UBGrade by gelounique · Entwickelt von Gelo Santino Mares</span><span style="flex:1"></span><a href="https://uniquebaby.de" target="_blank" rel="noopener">uniquebaby.de</a><a href="https://instagram.com/gelounique" target="_blank" rel="noopener">@gelounique</a><a href="https://uniquebaby.de/#impressum" target="_blank" rel="noopener">Impressum</a><a href="https://uniquebaby.de/#datenschutz" target="_blank" rel="noopener">Datenschutz</a></div></footer>
+
+<script>
+(function(){var b=document.getElementById('ba');if(!b)return;var d=false;function m(e){var r=b.getBoundingClientRect(),x=((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width;b.style.setProperty('--x',Math.max(0,Math.min(1,x))*100+'%')}
+b.addEventListener('pointerdown',function(e){d=true;b.setPointerCapture(e.pointerId);m(e)});b.addEventListener('pointermove',function(e){if(d)m(e)});b.addEventListener('pointerup',function(){d=false});
+if(window.UBGRADE_DOWNLOAD)document.getElementById('dl').href=window.UBGRADE_DOWNLOAD;})();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+ "format": "ubgrade",
+ "version": 3,
+ "id": "gStartClean",
+ "name": "01 Clean Natural",
+ "mode": "photo",
+ "created": "2026-11-12T00:00:00Z",
+ "app": "UBGrade 4.1.0 by gelounique",
+ "strength": 1,
+ "input": {
+  "profile": "none",
+  "display": 0,
+  "exposure": 0
+ },
+ "chain": [
+  {
+   "type": "basic",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "exposure": 0,
+    "contrast": 12,
+    "highlights": -25,
+    "shadows": 15,
+    "whites": 5,
+    "blacks": -5,
+    "saturation": 100,
+    "vibrance": 15
+   }
+  },
+  {
+   "type": "vignette",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": -15,
+    "size": 52,
+    "roundness": 0,
+    "feather": 65,
+    "cx": 0,
+    "cy": 0
+   }
+  }
+ ],
+ "luts": {},
+ "thumb": ""
+}

@@ -1,0 +1,109 @@
+{
+ "format": "ubgrade",
+ "version": 3,
+ "id": "gStartGolden",
+ "name": "04 Golden Hour Film",
+ "mode": "photo",
+ "created": "2026-11-11T12:00:00Z",
+ "app": "UBGrade 4.1.0 by gelounique",
+ "strength": 1,
+ "input": {
+  "profile": "none",
+  "display": 0,
+  "exposure": 0
+ },
+ "chain": [
+  {
+   "type": "basic",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "exposure": 0.15,
+    "contrast": 22,
+    "highlights": -30,
+    "shadows": 18,
+    "whites": 8,
+    "blacks": -12,
+    "saturation": 108,
+    "vibrance": 22
+   }
+  },
+  {
+   "type": "grading",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "sh_h": 205,
+    "sh_s": 28,
+    "sh_l": -4,
+    "md_h": 30,
+    "md_s": 6,
+    "md_l": 0,
+    "hi_h": 38,
+    "hi_s": 26,
+    "hi_l": 4,
+    "balance": -8,
+    "blending": 55
+   }
+  },
+  {
+   "type": "film",
+   "on": true,
+   "strength": 0.85,
+   "params": {
+    "stock": "ub250d",
+    "warmth": 18
+   }
+  },
+  {
+   "type": "halation",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": 38,
+    "radius": 28,
+    "threshold": 62,
+    "hue": 8
+   }
+  },
+  {
+   "type": "diffusion",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": 22,
+    "size": 30,
+    "highlights": 60,
+    "warmth": 12,
+    "softness": 25
+   }
+  },
+  {
+   "type": "vignette",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": -28,
+    "size": 52,
+    "roundness": 0,
+    "feather": 65,
+    "cx": 0,
+    "cy": 0
+   }
+  },
+  {
+   "type": "grain",
+   "on": true,
+   "strength": 1,
+   "params": {
+    "amount": 18,
+    "size": 110,
+    "color": 20,
+    "response": 60,
+    "animate": true
+   }
+  }
+ ],
+ "luts": {},
+ "thumb": ""
+}

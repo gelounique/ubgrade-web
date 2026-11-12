@@ -2,88 +2,216 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UBGrade by gelounique – Color Grading im Browser testen</title>
-<meta name="description" content="UBGrade by gelounique: All-in-one Color Grading. Teste Foto- und Video-Grading direkt im Browser, mit Tutorial für Einsteiger – Download für Windows & Mac mit Effekten für Premiere Pro, After Effects, Photoshop & DaVinci Resolve.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UBGrade by gelounique – Color Grading für Premiere Pro, After Effects, DaVinci Resolve & Photoshop</title>
+<meta name="description" content="UBGrade by gelounique: All-in-one Color Grading als Effekt in Premiere Pro, After Effects, DaVinci Resolve und Photoshop. Jetzt in der Beta – für kurze Zeit kostenlos für Windows & Mac und direkt im Browser ausprobieren.">
 <meta name="theme-color" content="#000000">
-<meta property="og:title" content="UBGrade by gelounique">
-<meta property="og:description" content="All-in-one Color Grading – jetzt im Browser testen. Für Premiere Pro, After Effects, Photoshop & DaVinci Resolve.">
-<meta property="og:image" content="https://ubgrade.uniquebaby.de/assets/og.png">
+<meta property="og:title" content="UBGrade by gelounique – jetzt in der Beta">
+<meta property="og:description" content="Ein Look. Jedes Programm. Color Grading für Premiere Pro, After Effects, DaVinci Resolve & Photoshop – für kurze Zeit kostenlos.">
+<meta property="og:image" content="https://ubgrade.uniquebaby.de/assets/og.jpg">
 <meta property="og:url" content="https://ubgrade.uniquebaby.de/">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<script>window.UBGRADE_DOWNLOAD = "https://github.com/gelounique/ubgrade-web/releases/download/v4.1.0/UBGrade-4.1.0.zip"; window.UBGRADE_VERSION = "4.1.0";</script>
 <link rel="icon" href="assets/icon-64.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/ubgrade.css">
-<style>#mobile{display:none}@media (max-width:760px),(pointer:coarse) and (max-width:1024px){#mobile{position:fixed;inset:0;z-index:400;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;text-align:center;font-family:"Instrument Sans",system-ui,sans-serif;color:#ececef}#mobile img{width:112px;border-radius:24%}#mobile h2{margin:6px 0 0;font-size:28px}#mobile p{color:#9a9aa3;line-height:1.5;max-width:320px}#mobile a{background:#ffb6d5;color:#111;font-weight:600;padding:13px 20px;border-radius:99px;text-decoration:none}#mobile a.g{background:transparent;color:#ececef;border:1px solid #333}#mobile span{font:600 10px "JetBrains Mono",monospace;letter-spacing:.3em;color:#ffb6d5;margin-top:8px}}</style>
+<link rel="stylesheet" href="landing.css">
+<script>/* old links like ?tutorial=1 open the web app */ if (/[?&]tutorial=1/.test(location.search)) location.replace('app/?tutorial=1');</script>
 </head>
 <body>
-<div id="mobile"><img src="assets/icon-256.png" alt=""><h2>UBGrade</h2><p>Die Testversion ist für Desktop gemacht – öffne <b>ubgrade.uniquebaby.de</b> am Computer, um Bilder & Videos zu graden.</p><a class="g" href="anleitung.html">Anfänger-Anleitung lesen</a><a href="https://github.com/gelounique/ubgrade-web/releases/download/v4.1.0/UBGrade-4.1.0.zip">Download für Windows &amp; Mac</a><span>BY GELOUNIQUE</span></div>
-<div id="splash"><div class="w">
-  <div class="ico"><div class="tile"></div><div class="track"></div><div class="ring glow"></div><div class="ring"></div><img class="un" src="assets/logo-un.png" alt="UBGrade"></div>
-  <div class="nm"><b>UBGrade</b><span>BY GELOUNIQUE</span></div><div class="pc">0</div>
-</div></div>
 
-<div id="app">
-  <header class="tb">
-    <div class="logo nd" id="about"><img src="assets/logo-ub.png" alt="UB"><b>UBGrade</b></div>
-    <div class="mode" id="mode"><i></i><span>FOTO</span></div>
-    <div class="src" id="src">Keine Quelle</div>
-    <button class="ib" id="bOpen" title="Öffnen (Strg+O)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
-    <button class="ib" id="bUndo" title="Rückgängig (Strg+Z)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
-    <button class="ib" id="bRedo" title="Wiederholen (Strg+Y)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m15 14 5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/></svg></button>
-    <button class="ib help" id="bHelp" title="Tutorial für Einsteiger (F1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.8"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg></button>
-  </header>
+<div id="ld" aria-hidden="true"><div class="ld-ico"><i class="ld-ring"></i><img src="assets/un-white.png" alt=""></div><span class="ld-pc">0</span></div>
 
-  <aside class="looks">
-    <div class="H"><h2>UBGrades</h2><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" placeholder="UBGrade suchen"></div>
-      <button class="ib" id="bImport" title=".ubgrade / .cube importieren"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 4h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5"/><path d="M3 12h11m-4-4 4 4-4 4"/></svg></button></div>
-    <div class="cats" id="cats"></div>
-    <div class="lgrid" id="lgrid"></div>
-  </aside>
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="UBGrade – nach oben"><img src="assets/ub-white.png" alt="UB"><b>UBGrade</b><span class="tag">BETA</span></a>
+  <nav class="links">
+    <a href="#vergleich">Vorher/Nachher</a><a href="#workflow">So geht’s</a><a href="#tools">Tools</a><a href="#download">Download</a><a href="#bug">Bug melden</a>
+  </nav>
+  <a class="btn pink sm" href="app/">Ausprobieren</a>
+</header>
 
-  <main class="view" id="view">
-    <div class="readout" id="readout"><span>R <b id="rR">–</b></span><span class="d"></span><span>G <b id="rG">–</b></span><span class="d"></span><span>B <b id="rB">–</b></span>
-      <button class="notch" id="notch" title="Scopes"><svg viewBox="0 0 14 10"><path d="M1 1h12L7 9z" fill="currentColor"/></svg></button></div>
-    <div class="stage" id="stage">
-      <canvas id="cv"></canvas>
-      <div class="split" id="split"><em class="l">VORHER</em><em class="r">NACHHER</em></div>
-      <div class="scopes" id="scopes"><div class="sh" id="scopeTabs"><button data-m="wave" class="on">WAVEFORM</button><button data-m="parade">RGB PARADE</button><button data-m="vector">VECTORSCOPE</button><button data-m="hist">HISTOGRAMM</button></div><canvas id="scv" width="1040" height="300"></canvas></div>
-      <div class="drop"><div class="c"><img src="assets/logo-un.png" alt=""><h3>Bild oder Video reinziehen</h3><p>Bild → Foto-Modus mit Export · Video → Video-Modus. Aus Premiere, After Effects, DaVinci & Photoshop öffnet sich UBGrade direkt mit dem aktuellen Frame.</p><button class="bt pri" id="bOpen2">Datei öffnen</button></div></div>
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <img class="bg-ring" src="assets/farbring.png" alt="" aria-hidden="true">
+  <div class="wrap hero-grid">
+    <div class="hero-txt">
+      <img class="hero-ico reveal" src="assets/icon-192.png" alt="UBGrade" width="88" height="88">
+      <div class="eyebrow pink reveal">UBGRADE BY GELOUNIQUE</div>
+      <h1 class="reveal">Dein Look.<br><span class="pk">In jedem Programm.</span></h1>
+      <p class="lead reveal">All-in-one Color Grading für Premiere Pro, After Effects, Photoshop &amp; DaVinci Resolve – Windows &amp; Mac.</p>
+      <div class="hero-cta reveal">
+        <a class="try" href="app/" id="tryBtn"><span class="try-ring" aria-hidden="true"></span><span class="try-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>Ausprobieren</span></a>
+        <a class="btn ghost" href="#download">Download Windows &amp; Mac</a>
+      </div>
+      <div class="beta-note reveal"><i class="dot"></i><span><b>BETA</b> · für kurze Zeit kostenlos zum Download und Ausprobieren</span></div>
     </div>
-    <div class="tl"><button class="ib" id="tPlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg></button><div class="scrub" id="scrub"><div class="tr"></div><div class="fl" id="sFill"></div><div class="kn" id="sKnob"></div></div><div class="tc" id="tc">00:00:00:00</div></div>
-  </main>
+    <figure class="hero-shot reveal"><img src="assets/shot-video.jpg" alt="UBGrade Video-Edition: Tool-Chain, Look-Bibliothek und Regler" width="1800" height="1095"></figure>
+  </div>
+  <div class="hosts hero-hosts reveal" aria-label="Unterstützte Programme"><span>Premiere Pro</span><span>After Effects</span><span>Photoshop</span><span>DaVinci Resolve</span></div>
+</section>
 
-  <aside class="tools">
-    <div class="H" id="toolsH"><h2>Tools</h2></div>
-    <div class="body" id="toolsBody"></div>
-  </aside>
+<!-- BETA -->
+<section class="sec beta-sec" id="beta">
+  <div class="wrap">
+    <div class="panel beta reveal">
+      <div class="beta-l">
+        <div class="eyebrow pink">BETA 4.1</div>
+        <h2>Jetzt in der Beta.<br>Für kurze Zeit kostenlos.</h2>
+      </div>
+      <div class="beta-r">
+        <p>UBGrade ist fertig genug, um damit zu arbeiten – und noch frisch genug, dass dein Feedback zählt. Solange die Beta läuft, kannst du alles <b>kostenlos laden und ausprobieren</b>: die Plugins für Windows &amp; Mac und die Testversion im Browser.</p>
+        <p class="fine">Etwas hakt? <a class="tl" href="#bug">Bug melden</a> – jede Meldung macht UBGrade besser.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="chain">
-    <button class="vtab on" id="tabLooks" title="UBGrades ein/aus">LOOKS</button>
-    <div class="lane" id="lane"></div>
-    <button class="vtab r on" id="tabTools" title="Tools ein/aus">TOOLS</button>
-  </section>
+<!-- VORHER / NACHHER -->
+<section class="sec" id="vergleich">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">VORHER / NACHHER</div>
+      <h2>Vom flachen LOG zum fertigen Look.</h2>
+      <p>Szenen aus dem Musikvideo <a class="tl" href="https://youtu.be/eHY_uJKNNXE" target="_blank" rel="noopener">„OMAH LAY“ von unique</a>. Links unbearbeitet in LOG, rechts mit UBGrade gegradet – live in deinem Browser, mit derselben Engine wie im Plugin. Zieh den Regler und wechsle den Look.</p>
+    </div>
+    <div class="cmp reveal" id="cmp">
+      <div class="cmp-view" id="cmpView">
+        <canvas id="cmpCv"></canvas>
+        <video id="cmpVid" muted playsinline loop preload="auto" crossorigin="anonymous" poster="media/drohne.jpg"></video>
+        <div class="cmp-lbl l">VORHER · LOG</div><div class="cmp-lbl r" id="cmpLook">UBGRADE · TEAL &amp; ORANGE</div>
+        <div class="cmp-split" id="cmpSplit"><i></i><b aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6 3 12l6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></b></div>
+        <button class="cmp-play" id="cmpPlay" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/></svg></button>
+      </div>
+      <div class="cmp-ctl">
+        <div class="chips" id="cmpScenes" role="tablist" aria-label="Szene"></div>
+        <div class="chips looks" id="cmpLooks" role="tablist" aria-label="Look"></div>
+      </div>
+      <p class="cmp-note" id="cmpNote">Jeder Look = Kamera-Input (LOG → Rec.709) + eine Handvoll Tools. Rezepte zum Nachbauen in der <a class="tl" href="anleitung.html#rezepte">Anleitung</a>.<br><span class="fine">Vorher-Ansicht aus dem Musikvideo in LOG zurückgerechnet.</span></p>
+    </div>
+  </div>
+</section>
 
-  <footer class="st">
-    <button class="ib" id="bReset" title="Alles zurücksetzen" style="margin:0 6px 0 10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
-    <div class="cell look">UBGrade: <b id="gname">Unbenannt</b><button class="ib" id="bSave" title="Als UBGrade speichern (Strg+S)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 3h11l3 3v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M8 3v5h8V3M8 21v-7h8v7"/></svg></button></div>
-    <div class="cell"><button class="ib" id="bBypass" title="Vorher/Nachher (\)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="m6 6 12 12"/></svg></button><button class="ib" id="bSplit" title="Split (S)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M12 5v14"/></svg></button><button class="ib" id="bFalse" title="False Color (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18h4V8H4zM10 18h4V4h-4zM16 18h4v-6h-4z"/></svg></button></div>
-    <div class="cell str" id="gStr" title="Ziehen zum Ändern · Doppelklick = 100 %">Stärke: <b id="gStrV">100.0 %</b></div>
-    <div class="grow"></div>
-    <span id="actions" style="display:contents"></span>
-  </footer>
-</div>
-<div id="toast"></div>
-<input type="file" id="fileIn" hidden accept="image/*,video/*,.ubgrade,.cube">
-<script src="js/colorspace.js"></script>
-<script src="js/engine.js"></script>
-<script src="js/tools.js"></script>
-<script src="js/lib.js"></script>
-<script src="js/scopes.js"></script>
-<script src="js/icons.js"></script>
-<script src="js/app.js"></script>
-<script src="js/tutorial.js"></script>
+<!-- WORKFLOW -->
+<section class="sec" id="workflow">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">SO GEHT’S</div>
+      <h2>Drei Klicks bis zum Look.</h2>
+      <p>Wie du es von großen Grading-Plugins kennst – nur aufgeräumter. UBGrade öffnet sich direkt mit dem Frame unter deinem Playhead. Nichts reinziehen, nichts exportieren.</p>
+    </div>
+    <div class="steps">
+      <div class="panel step reveal"><span class="n">01</span><h3>Effekt drauf</h3><p><b>Effekte › UNIQUEBABY › UBGrade</b> auf den Clip oder eine Einstellungsebene ziehen.</p></div>
+      <div class="panel step reveal"><span class="n">02</span><h3>UBGrade öffnen</h3><p>Ein Klick auf <b>„UBGrade öffnen…“</b> – dein Frame ist schon da. Look aus Tools zusammenbauen.</p></div>
+      <div class="panel step reveal"><span class="n">03</span><h3>OK</h3><p>Der Grade sitzt auf dem ganzen Clip und wird nativ gerendert. Später nochmal öffnen = weiter feilen.</p></div>
+    </div>
+    <figure class="shot reveal"><img src="assets/shot-video.jpg" alt="UBGrade Video-Edition in Premiere Pro mit Tool-Chain" loading="lazy" width="1800" height="1095"></figure>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec" id="tools">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">WAS DRIN IST</div>
+      <h2>Alles, was ein Look braucht.</h2>
+    </div>
+    <div class="bento">
+      <div class="panel b-tools reveal">
+        <h3>23 Tools in einer Chain</h3>
+        <p>Licht, Optik, Farbe, Film und Finish – jedes Tool mit klarem Icon, frei kombinierbar, an/aus per Klick.</p>
+        <div class="ticons">
+          <span><img src="assets/tools/Basis-Ton.svg" alt="">Basis-Ton</span><span><img src="assets/tools/Kurven.svg" alt="">Kurven</span><span><img src="assets/tools/Farbraeder.svg" alt="">Farbräder</span><span><img src="assets/tools/Split-Toning.svg" alt="">Split-Toning</span><span><img src="assets/tools/HSL.svg" alt="">HSL</span><span><img src="assets/tools/Film-Charakter.svg" alt="">Film-Charakter</span><span><img src="assets/tools/Halation.svg" alt="">Halation</span><span><img src="assets/tools/Diffusion.svg" alt="">Diffusion</span><span><img src="assets/tools/Korn.svg" alt="">Korn</span><span><img src="assets/tools/Vignette.svg" alt="">Vignette</span><span><img src="assets/tools/Bleach-Bypass.svg" alt="">Bleach Bypass</span><span><img src="assets/tools/LUT.svg" alt="">LUT</span>
+        </div>
+      </div>
+      <div class="panel b-film reveal"><h3>Film-Emulation</h3><p>Eigene UB-Filmstocks, Halation, Diffusion und organisches Korn – auflösungsunabhängig und animiert.</p></div>
+      <div class="panel b-share reveal"><h3>Looks als .ubgrade</h3><p>Speichern, teilen, importieren. Ein Look funktioniert in allen Programmen – und als .cube-LUT für alles andere.</p></div>
+      <div class="panel b-foto reveal"><img src="assets/shot-foto.jpg" alt="UBGrade Foto-Edition" loading="lazy"><div><h3>Foto-Edition</h3><p>Die UBGrade App und der Photoshop-Filter für Bilder – in voller Auflösung, als Smartfilter wieder bearbeitbar.</p></div></div>
+      <div class="panel b-scope reveal"><h3>Scopes &amp; False Color</h3><p>Waveform, RGB-Parade, Vektorskop und Histogramm direkt unterm Bild.</p></div>
+      <div class="panel b-help reveal"><h3>Neu im Grading?</h3><p>Tutorial mit <b>(?)</b> direkt am Regler und eine <a class="tl" href="anleitung.html">Anfänger-Anleitung</a> mit 4 Starter-Looks.</p></div>
+    </div>
+    <div class="hosts reveal" aria-label="Unterstützte Programme">
+      <span>Premiere Pro</span><span>After Effects</span><span>DaVinci Resolve</span><span>Photoshop</span><span>UBGrade App</span><span>Windows</span><span>macOS</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="sec" id="download">
+  <div class="wrap">
+    <div class="panel dl reveal">
+      <div class="dl-head">
+        <img class="dl-ico" src="assets/icon-192.png" alt="" width="96" height="96">
+        <div>
+          <div class="eyebrow pink">UBGRADE 4.1.0 · BETA</div>
+          <h2>Kostenlos laden.</h2>
+          <p>Solange die Beta läuft, für alle. Der Installer erkennt jede installierte Version von Premiere Pro, After Effects und Photoshop – du wählst, wo UBGrade landet. DaVinci Resolve, Adobe-Panel und App sind dabei, ein Uninstaller auch.</p>
+        </div>
+      </div>
+      <div class="dl-btns">
+        <a class="dlbtn" id="dlWin" href="https://github.com/gelounique/ubgrade-web/releases/download/v4.1.0/UBGrade-Setup-4.1.0.exe">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 10.5 4.4v7H3zM11.6 4.3 21 3v8.4h-9.4zM3 12.6h7.5v7L3 18.5zm8.6 0H21V21l-9.4-1.3z" fill="currentColor"/></svg>
+          <span><b>Windows</b><small>Setup .exe · Windows 10/11 · 106 MB</small></span><i class="arr" aria-hidden="true">↓</i>
+        </a>
+        <a class="dlbtn" id="dlMac" href="https://github.com/gelounique/ubgrade-web/releases/download/v4.1.0/UBGrade-4.1.0-mac.dmg">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.5 2-3.6-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.9-.9-3.1-.8C6.8 7.3 5.3 8.2 4.5 9.6c-1.7 2.9-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.1.8c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.7-1-2.7-4zM14.1 5.5c.6-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.3z" fill="currentColor"/></svg>
+          <span><b>macOS</b><small>DMG · Apple Silicon &amp; Intel · 189 MB</small></span><i class="arr" aria-hidden="true">↓</i>
+        </a>
+      </div>
+      <div class="dl-foot">
+        <a class="tl" href="https://github.com/gelounique/ubgrade-web/releases/download/v4.1.0/UBGrade-4.1.0.zip">Alles als ZIP</a><span>Windows + Mac + Uninstaller + Anfänger-Anleitung + Starter-Looks · 293 MB</span>
+      </div>
+      <p class="fine">Noch unsigniert: Windows zeigt evtl. „Der Computer wurde durch Windows geschützt“ → <b>Weitere Informationen › Trotzdem ausführen</b>. Auf dem Mac den Installer per <b>Rechtsklick › Öffnen</b> starten.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUG -->
+<section class="sec" id="bug">
+  <div class="wrap narrow">
+    <div class="head reveal">
+      <div class="eyebrow">BUG MELDEN</div>
+      <h2>Etwas läuft nicht rund?</h2>
+      <p>Schreib uns, was passiert ist – die Meldung geht direkt an <b>support@uniquebaby.de</b>. Je genauer, desto schneller ist es gefixt.</p>
+    </div>
+    <form class="panel form reveal" id="bugForm" novalidate>
+      <div class="row2">
+        <label>Name<input name="name" autocomplete="name" placeholder="unique" required></label>
+        <label>E-Mail<input name="email" type="email" autocomplete="email" placeholder="du@mail.de" required></label>
+      </div>
+      <div class="row2">
+        <label>Wo ist es passiert?
+          <select name="bereich" required>
+            <option value="">Bitte wählen</option>
+            <option>Premiere Pro</option><option>After Effects</option><option>DaVinci Resolve</option><option>Photoshop</option><option>UBGrade App</option><option>Testversion im Browser</option><option>Installer / Uninstaller</option><option>Sonstiges</option>
+          </select>
+        </label>
+        <label>System &amp; Version <span class="opt">optional</span><input name="system" placeholder="z. B. Windows 11, Premiere Pro 2026"></label>
+      </div>
+      <label>Was ist passiert?<textarea name="message" rows="6" required placeholder="Was hast du gemacht, was ist passiert, was hättest du erwartet?"></textarea></label>
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-foot">
+        <button class="btn" type="submit" id="bugSend">Meldung senden</button>
+        <p class="fine">Deine Angaben werden nur zur Bearbeitung der Meldung genutzt und über den Formulardienst FormSubmit an support@uniquebaby.de geschickt. <a class="tl" href="https://uniquebaby.de/#datenschutz" target="_blank" rel="noopener">Datenschutz</a></p>
+      </div>
+      <div class="form-msg" id="bugMsg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="f-l"><img src="assets/un-white.png" alt="UN" class="f-un"><div><b>UBGrade by gelounique</b><span>Entwickelt von Gelo Santino Mares</span></div></div>
+    <nav class="f-r"><a href="app/">Testversion</a><a href="anleitung.html">Anleitung</a><a href="https://uniquebaby.de" target="_blank" rel="noopener">uniquebaby.de</a><a href="https://instagram.com/gelounique" target="_blank" rel="noopener">@gelounique</a><a href="https://uniquebaby.de/#impressum" target="_blank" rel="noopener">Impressum</a><a href="https://uniquebaby.de/#datenschutz" target="_blank" rel="noopener">Datenschutz</a></nav>
+  </div>
+</footer>
+
+<script src="app/js/colorspace.js" defer></script>
+<script src="app/js/engine.js" defer></script>
+<script src="app/js/tools.js" defer></script>
+<script src="app/js/lib.js" defer></script>
+<script src="landing.js" defer></script>
 </body>
 </html>

@@ -61,7 +61,7 @@
     if (!N) {
       b.classList.add('web'); const dl = window.UBGRADE_DOWNLOAD || 'https://ubgrade.uniquebaby.de/';
       const tb = $('.tb'), redo = $('#bRedo');
-      const badge = el('span', 'beta nd', 'TESTVERSION'); badge.title = `Browser-Version zum Testen – Fotos komplett, Videos limitiert (${TRIAL} s Vorschau, Frame-Export mit Wasserzeichen)`;
+      const badge = el('a', 'beta nd', 'TESTVERSION'); badge.href = '/'; badge.style.textDecoration = 'none'; badge.title = `Browser-Version zum Testen – Fotos komplett, Videos limitiert (${TRIAL} s Vorschau, Frame-Export mit Wasserzeichen)`;
       const a = el('a', 'dlb nd'); a.href = dl; a.target = '_blank'; a.rel = 'noopener';
       a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span>Download <em>Windows &amp; Mac</em></span>`;
       a.title = 'UBGrade 4.1.0 – Setup für Windows + Installer für macOS, mit Plugins für Premiere Pro, After Effects, Photoshop & DaVinci Resolve';

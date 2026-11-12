@@ -1,6 +1,8 @@
-# UBGrade by gelounique — Web-Testversion
+# UBGrade by gelounique — ubgrade.uniquebaby.de
 
-**https://ubgrade.uniquebaby.de** · Testversion im Browser (WebGL2): Fotos komplett, Videos limitiert (30 s, Wasserzeichen). Dateien bleiben auf dem Gerät, nichts wird hochgeladen.
+**https://ubgrade.uniquebaby.de** · Präsentationsseite mit Beta-Download, Vorher/Nachher und Bug-Formular.
+
+**/app/** · Testversion im Browser (WebGL2): Fotos komplett, Videos limitiert (30 s, Wasserzeichen). Dateien bleiben auf dem Gerät, nichts wird hochgeladen.
 
 Anfänger-Anleitung: https://ubgrade.uniquebaby.de/anleitung.html
 

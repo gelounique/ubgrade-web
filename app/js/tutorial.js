@@ -34,7 +34,7 @@
       act: () => [['Weißabgleich öffnen', () => addTool('wb')]] },
     { t: '3 · Dein Look', sel: () => chip('grading') || tile('grading'), tool: 'grading',
       b: `Jetzt kommt die Stimmung. <b>Split-Toning</b> färbt dunkle und helle Bereiche getrennt – der Kino-Klassiker:<ul><li><b>Tiefen Farbton</b> ≈ 200 (Blau-Grün), <b>Sättigung</b> 15–25</li><li><b>Lichter Farbton</b> ≈ 35 (Orange), <b>Sättigung</b> 15–25</li></ul>Kleine Werte wirken hochwertiger als große.`,
-      act: (e) => [['Split-Toning öffnen', () => addTool('grading')]].concat(e.web && location.protocol.startsWith('http') && UB.app.importDoc ? [['Fertigen Starter-Look testen', async () => UB.app.importDoc(await (await fetch('rezepte/02-Teal-Orange-Kino.ubgrade')).json())]] : []) },
+      act: (e) => [['Split-Toning öffnen', () => addTool('grading')]].concat(e.web && location.protocol.startsWith('http') && UB.app.importDoc ? [['Fertigen Starter-Look testen', async () => UB.app.importDoc(await (await fetch('/rezepte/02-Teal-Orange-Kino.ubgrade')).json())]] : []) },
     { t: '4 · Filmgefühl', sel: () => chip('film') || chip('grain') || tile('film'),
       b: `Der Feinschliff, der aus „gefiltert“ „gefilmt“ macht:<ul><li><b>Film-Charakter</b> für Farben &amp; Tonalität echter Filme</li><li><b>Korn</b> 10–20 für Textur</li><li><b>Vignette</b> −15 bis −30 lenkt den Blick zur Mitte</li></ul>`,
       act: () => [['Film-Charakter', () => addTool('film')], ['Korn', () => addTool('grain')], ['Vignette', () => addTool('vignette')]] },
@@ -47,7 +47,7 @@
 
   function openGuide() {
     if (window.ubNative && window.ubNative.openExternal) window.ubNative.openExternal(GUIDE);
-    else window.open(location.protocol.startsWith('http') ? 'anleitung.html' : GUIDE, '_blank', 'noopener');
+    else window.open(location.protocol.startsWith('http') ? '/anleitung.html' : GUIDE, '_blank', 'noopener');
   }
 
   let i = 0, root = null;

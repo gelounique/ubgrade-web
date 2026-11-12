@@ -1,0 +1,4 @@
+<!DOCTYPE html><meta charset="utf-8"><title>UBGrade rx</title><body style="background:#000;color:#fff;font:16px sans-serif;padding:40px">warte…<script>
+addEventListener('message',e=>{if(!(e.data&&e.data.blob))return;const a=document.createElement('a');a.href=URL.createObjectURL(e.data.blob);a.download=e.data.name||'ubg-clips.bin';document.body.appendChild(a);a.click();document.body.textContent='gespeichert: '+a.download+' ('+e.data.blob.size+' Bytes)';});
+if(window.opener)window.opener.postMessage({ready:1},'*');
+</script>

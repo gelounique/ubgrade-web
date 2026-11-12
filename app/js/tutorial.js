@@ -15,7 +15,7 @@
 
   async function loadDemo() {
     const img = new Image(); img.src = 'assets/demo.jpg'; await img.decode();
-    UB.app.setImage(await createImageBitmap(img), 'Beispielbild.jpg');
+    UB.app.setImage(await createImageBitmap(img), 'OMAH LAY – Beispielbild.jpg');
   }
 
   const STEPS = [

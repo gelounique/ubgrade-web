@@ -19,6 +19,25 @@
     if (shown < 100) requestAnimationFrame(tick); else setTimeout(() => { ld.classList.add('out'); document.body.classList.add('loaded'); }, 220);
   })(t0);
 
+  // ---------------------------------------------------------------- Farbwähler im Hintergrund: Knopf fährt über den Farbring und „sucht“ Farben aus
+  const arm = $('#pkArm'), flt = $('.pk-float'), root = document.documentElement;
+  const hsl2hex = (h, s, l) => { s /= 100; l /= 100; const k = (n) => (n + h / 30) % 12, a = s * Math.min(l, 1 - l), f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1))); return '#' + [f(0), f(8), f(4)].map((x) => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase(); };
+  let ang = 212, from = 212, to = 212, tA = 0, hold = 0;
+  const pick = (a) => { const h = ((a % 360) + 360) % 360; arm.style.setProperty('--ang', a + 'deg'); root.style.setProperty('--pick', `hsl(${h.toFixed(0)} 100% 60%)`); $('#pkHex').textContent = hsl2hex(h, 100, 60); $('#pkHsl').textContent = `H ${Math.round(h)}° · S 100 · L 60`; };
+  const ringEl = $('.pk-ring'), knob = $('.pk-knob');
+  const placeKnob = () => { const r = ringEl.offsetWidth / 2 - 23; knob.style.top = -(r + 26) + 'px'; };
+  addEventListener('resize', placeKnob); placeKnob();
+  pick(ang);
+  if (!reduce) (function pk(now) {
+    requestAnimationFrame(pk);
+    if (now < hold) return;
+    if (!tA) { from = ang; to = ang + (Math.random() < 0.5 ? -1 : 1) * (55 + Math.random() * 150); tA = now; }
+    const d = Math.min(1, (now - tA) / 1700), e = d < 0.5 ? 4 * d * d * d : 1 - Math.pow(-2 * d + 2, 3) / 2;
+    ang = from + (to - from) * e; pick(ang);
+    if (d >= 1) { tA = 0; hold = now + 1400 + Math.random() * 1200; }
+  })(performance.now());
+  addEventListener('scroll', () => { flt.style.opacity = String(1 - Math.min(0.6, (scrollY / innerHeight) * 0.6)); }, { passive: true });
+
   // ---------------------------------------------------------------- nav + reveal
   const nav = $('#nav');
   addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 40), { passive: true });
@@ -37,18 +56,9 @@
     { id: 'speedboot', name: 'Speedboot', log: 'log3g10' },
     { id: 'bootstag', name: 'Bootstag', log: 'log3g10' },
   ];
-  const B = (p) => ({ type: 'basic', params: p });
-  const LOOKS = [
-    { name: 'Golden Hour', sw: 'linear-gradient(135deg,#f6b25a,#ff7f5c)', chain: [B({ contrast: 16, highlights: -26, shadows: 14, vibrance: 16 }), { type: 'grading', params: { sh_h: 205, sh_s: 18, hi_h: 36, hi_s: 22, balance: -8 } }, { type: 'film', params: { stock: 'ub250d', warmth: 20 }, strength: 0.75 }, { type: 'halation', params: { amount: 34, radius: 28, threshold: 62 } }, { type: 'diffusion', params: { amount: 18 } }, { type: 'vignette', params: { amount: -24, size: 52, feather: 65 } }, { type: 'grain', params: { amount: 14 } }] },
-    { name: 'Teal & Orange', sw: 'linear-gradient(135deg,#1f8a94,#f2a25a)', chain: [B({ contrast: 24, highlights: -32, shadows: 10, blacks: -14, saturation: 104, vibrance: 14 }), { type: 'grading', params: { sh_h: 192, sh_s: 42, hi_h: 30, hi_s: 34, md_h: 28, md_s: 8, balance: 6 } }, { type: 'film', params: { stock: 'ub250d', warmth: 4 }, strength: 0.7 }, { type: 'vignette', params: { amount: -22, size: 52, feather: 65 } }, { type: 'grain', params: { amount: 14 } }] },
-    { name: 'Moody Film', sw: 'linear-gradient(135deg,#1e2833,#6d665b)', chain: [B({ exposure: -0.2, contrast: 12, highlights: -35, shadows: 4, saturation: 78 }), { type: 'fade', params: { amount: 24, roll: 25, tint_h: 220, tint_s: 12 } }, { type: 'grading', params: { sh_h: 212, sh_s: 24, hi_h: 42, hi_s: 10 } }, { type: 'film', params: { stock: 'ub500t', warmth: -12 }, strength: 0.6 }, { type: 'vignette', params: { amount: -32, size: 50, feather: 65 } }, { type: 'grain', params: { amount: 22 } }] },
-    { name: 'Clean Natural', sw: 'linear-gradient(135deg,#e9edf0,#b9c6cf)', chain: [{ type: 'wb', params: { temp: -22, tint: 6 } }, B({ contrast: 10, highlights: -28, shadows: 14, whites: 6, blacks: -6, saturation: 94, vibrance: 10 })] },
-    { name: 'Night 800T', sw: 'linear-gradient(135deg,#1b2a4a,#c4523f)', chain: [B({ exposure: -0.25, contrast: 14, highlights: -30, saturation: 92 }), { type: 'film', params: { stock: 'night800', warmth: -6 }, strength: 0.85 }, { type: 'halation', params: { amount: 40, radius: 30, threshold: 58 } }, { type: 'grain', params: { amount: 24 } }] },
-    { name: 'Bleach Bypass', sw: 'linear-gradient(135deg,#59646a,#c9c2b4)', chain: [{ type: 'bleach', params: { contrast: 55, desat: 52 } }, B({ highlights: -18, shadows: 8 }), { type: 'vignette', params: { amount: -20, size: 54, feather: 65 } }] },
-    { name: 'Noir', sw: 'linear-gradient(135deg,#111,#ddd)', chain: [{ type: 'bw', params: {} }, B({ contrast: 26, highlights: -18, shadows: 6, blacks: -14 }), { type: 'vignette', params: { amount: -34, size: 50, feather: 60 } }, { type: 'grain', params: { amount: 26, size: 120 } }] },
-  ];
+  // Nachher = der fertige Grade des Videos: nur Kamera-Input (LOG → Rec.709), keine zusätzlichen Effekte
+  const LOOKS = [{ name: 'Grade', chain: [] }];
 
-  window.__LOOKS = LOOKS;
   const cmp = $('#cmp'), view = $('#cmpView'), cv = $('#cmpCv'), vid = $('#cmpVid'), splitEl = $('#cmpSplit');
   let E = null, split = 0.5, scene = 0, look = 0, playing = true, inView = false, dirty = true, states = [];
   function initEngine() {
@@ -60,10 +70,9 @@
     } catch (e) { E = null; cmp.classList.add('nogl'); vid.controls = false; }
   }
   function chips() {
-    const sc = $('#cmpScenes'), lk = $('#cmpLooks');
-    sc.innerHTML = '<span class="chip-lbl">SZENE</span>'; lk.innerHTML = '<span class="chip-lbl">LOOK</span>';
+    const sc = $('#cmpScenes');
+    sc.innerHTML = '<span class="chip-lbl">SZENE</span>';
     SCENES.forEach((s, i) => { const b = document.createElement('button'); b.className = 'chip' + (i === scene ? ' on' : ''); b.textContent = s.name; b.setAttribute('role', 'tab'); b.onclick = () => setScene(i); sc.appendChild(b); });
-    LOOKS.forEach((l, i) => { const b = document.createElement('button'); b.className = 'chip' + (i === look ? ' on' : ''); b.innerHTML = `<i class="sw" style="background:${l.sw}"></i>${l.name}`; b.setAttribute('role', 'tab'); b.onclick = () => setLook(i); lk.appendChild(b); });
   }
   // jeder Look = Kamera-Input (LOG → Rec.709) + Tools – wie im Plugin
   function buildStates() {
@@ -77,8 +86,7 @@
     if (playing && inView) vid.play().catch(() => {});
   }
   function setLook(i) {
-    look = i; $$('#cmpLooks .chip').forEach((b, k) => b.classList.toggle('on', k === i));
-    $('#cmpLook').textContent = 'UBGRADE · ' + LOOKS[i].name.toUpperCase(); dirty = true;
+    look = i; dirty = true;
   }
   function setSplit(x) { split = Math.max(0, Math.min(1, x)); splitEl.style.left = split * 100 + '%'; dirty = true; }
   function frame() {

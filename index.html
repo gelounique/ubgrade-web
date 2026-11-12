@@ -19,6 +19,14 @@
 </head>
 <body>
 
+<div class="picker" id="picker" aria-hidden="true">
+  <div class="pk-float">
+    <div class="pk-glow"></div><div class="pk-ring"></div>
+    <div class="pk-arm" id="pkArm"><div class="pk-knob"><i></i></div></div>
+    <div class="pk-read" id="pkRead"><b id="pkHex">#3B9DFF</b><span id="pkHsl">H 212° · S 100 · L 62</span></div>
+  </div>
+</div>
+
 <div id="ld" aria-hidden="true"><div class="ld-ico"><i class="ld-ring"></i><img src="assets/un-white.png" alt=""></div><span class="ld-pc">0</span></div>
 
 <header class="nav" id="nav">
@@ -26,19 +34,18 @@
   <nav class="links">
     <a href="#vergleich">Vorher/Nachher</a><a href="#workflow">So geht’s</a><a href="#tools">Tools</a><a href="#download">Download</a><a href="#bug">Bug melden</a>
   </nav>
-  <a class="btn pink sm" href="app/">Ausprobieren</a>
+  <a class="btn ring sm" href="app/"><span class="rg" aria-hidden="true"></span>Ausprobieren</a>
 </header>
 
 <main id="top">
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <img class="bg-ring" src="assets/farbring.png" alt="" aria-hidden="true">
   <div class="wrap hero-grid">
     <div class="hero-txt">
       <img class="hero-ico reveal" src="assets/icon-192.png" alt="UBGrade" width="88" height="88">
-      <div class="eyebrow pink reveal">UBGRADE BY GELOUNIQUE</div>
-      <h1 class="reveal">Dein Look.<br><span class="pk">In jedem Programm.</span></h1>
+      <div class="eyebrow reveal">UBGRADE BY GELOUNIQUE</div>
+      <h1 class="reveal">Dein Look.<br><span class="sub">In jedem Programm.</span></h1>
       <p class="lead reveal">All-in-one Color Grading für Premiere Pro, After Effects, Photoshop &amp; DaVinci Resolve – Windows &amp; Mac.</p>
       <div class="hero-cta reveal">
         <a class="try" href="app/" id="tryBtn"><span class="try-ring" aria-hidden="true"></span><span class="try-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>Ausprobieren</span></a>
@@ -46,7 +53,7 @@
       </div>
       <div class="beta-note reveal"><i class="dot"></i><span><b>BETA</b> · für kurze Zeit kostenlos zum Download und Ausprobieren</span></div>
     </div>
-    <figure class="hero-shot reveal"><img src="assets/shot-video.jpg" alt="UBGrade Video-Edition: Tool-Chain, Look-Bibliothek und Regler" width="1800" height="1095"></figure>
+    <figure class="hero-shot reveal"><img src="assets/shot-video.jpg" alt="UBGrade Video-Edition mit einer Szene aus OMAH LAY: links LOG, rechts gegradet" width="2000" height="1218"></figure>
   </div>
   <div class="hosts hero-hosts reveal" aria-label="Unterstützte Programme"><span>Premiere Pro</span><span>After Effects</span><span>Photoshop</span><span>DaVinci Resolve</span></div>
 </section>
@@ -54,9 +61,9 @@
 <!-- BETA -->
 <section class="sec beta-sec" id="beta">
   <div class="wrap">
-    <div class="panel beta reveal">
+    <div class="panel glowbox beta reveal">
       <div class="beta-l">
-        <div class="eyebrow pink">BETA 4.1</div>
+        <div class="eyebrow">BETA 4.1</div>
         <h2>Jetzt in der Beta.<br>Für kurze Zeit kostenlos.</h2>
       </div>
       <div class="beta-r">
@@ -73,21 +80,20 @@
     <div class="head reveal">
       <div class="eyebrow">VORHER / NACHHER</div>
       <h2>Vom flachen LOG zum fertigen Look.</h2>
-      <p>Szenen aus dem Musikvideo <a class="tl" href="https://youtu.be/eHY_uJKNNXE" target="_blank" rel="noopener">„OMAH LAY“ von unique</a>. Links unbearbeitet in LOG, rechts mit UBGrade gegradet – live in deinem Browser, mit derselben Engine wie im Plugin. Zieh den Regler und wechsle den Look.</p>
+      <p>Szenen aus dem Musikvideo <a class="tl" href="https://youtu.be/eHY_uJKNNXE" target="_blank" rel="noopener">„OMAH LAY“ von unique</a>. Links unbearbeitet in LOG, rechts der fertige Grade des Videos – keine zusätzlichen Effekte. Zieh den Regler.</p>
     </div>
     <div class="cmp reveal" id="cmp">
       <div class="cmp-view" id="cmpView">
         <canvas id="cmpCv"></canvas>
         <video id="cmpVid" muted playsinline loop preload="auto" crossorigin="anonymous" poster="media/drohne.jpg"></video>
-        <div class="cmp-lbl l">VORHER · LOG</div><div class="cmp-lbl r" id="cmpLook">UBGRADE · TEAL &amp; ORANGE</div>
+        <div class="cmp-lbl l">VORHER · LOG</div><div class="cmp-lbl r" id="cmpLook">NACHHER · GRADE</div>
         <div class="cmp-split" id="cmpSplit"><i></i><b aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6 3 12l6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></b></div>
         <button class="cmp-play" id="cmpPlay" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/></svg></button>
       </div>
       <div class="cmp-ctl">
         <div class="chips" id="cmpScenes" role="tablist" aria-label="Szene"></div>
-        <div class="chips looks" id="cmpLooks" role="tablist" aria-label="Look"></div>
       </div>
-      <p class="cmp-note" id="cmpNote">Jeder Look = Kamera-Input (LOG → Rec.709) + eine Handvoll Tools. Rezepte zum Nachbauen in der <a class="tl" href="anleitung.html#rezepte">Anleitung</a>.<br><span class="fine">Vorher-Ansicht aus dem Musikvideo in LOG zurückgerechnet.</span></p>
+      <p class="cmp-note fine" id="cmpNote">Vorher-Ansicht aus dem Musikvideo in LOG zurückgerechnet.</p>
     </div>
   </div>
 </section>
@@ -105,7 +111,7 @@
       <div class="panel step reveal"><span class="n">02</span><h3>UBGrade öffnen</h3><p>Ein Klick auf <b>„UBGrade öffnen…“</b> – dein Frame ist schon da. Look aus Tools zusammenbauen.</p></div>
       <div class="panel step reveal"><span class="n">03</span><h3>OK</h3><p>Der Grade sitzt auf dem ganzen Clip und wird nativ gerendert. Später nochmal öffnen = weiter feilen.</p></div>
     </div>
-    <figure class="shot reveal"><img src="assets/shot-video.jpg" alt="UBGrade Video-Edition in Premiere Pro mit Tool-Chain" loading="lazy" width="1800" height="1095"></figure>
+    <figure class="shot reveal"><img src="assets/shot-workflow.jpg" alt="UBGrade in Premiere Pro mit einem Frame aus OMAH LAY" loading="lazy" width="2000" height="1218"></figure>
   </div>
 </section>
 
@@ -124,8 +130,8 @@
           <span><img src="assets/tools/Basis-Ton.svg" alt="">Basis-Ton</span><span><img src="assets/tools/Kurven.svg" alt="">Kurven</span><span><img src="assets/tools/Farbraeder.svg" alt="">Farbräder</span><span><img src="assets/tools/Split-Toning.svg" alt="">Split-Toning</span><span><img src="assets/tools/HSL.svg" alt="">HSL</span><span><img src="assets/tools/Film-Charakter.svg" alt="">Film-Charakter</span><span><img src="assets/tools/Halation.svg" alt="">Halation</span><span><img src="assets/tools/Diffusion.svg" alt="">Diffusion</span><span><img src="assets/tools/Korn.svg" alt="">Korn</span><span><img src="assets/tools/Vignette.svg" alt="">Vignette</span><span><img src="assets/tools/Bleach-Bypass.svg" alt="">Bleach Bypass</span><span><img src="assets/tools/LUT.svg" alt="">LUT</span>
         </div>
       </div>
-      <div class="panel b-film reveal"><h3>Film-Emulation</h3><p>Eigene UB-Filmstocks, Halation, Diffusion und organisches Korn – auflösungsunabhängig und animiert.</p></div>
-      <div class="panel b-share reveal"><h3>Looks als .ubgrade</h3><p>Speichern, teilen, importieren. Ein Look funktioniert in allen Programmen – und als .cube-LUT für alles andere.</p></div>
+      <div class="panel glowbox b-film reveal"><h3>Film-Emulation</h3><p>Eigene UB-Filmstocks, Halation, Diffusion und organisches Korn – auflösungsunabhängig und animiert.</p></div>
+      <div class="panel glowbox b-share reveal"><h3>Looks als .ubgrade</h3><p>Speichern, teilen, importieren. Ein Look funktioniert in allen Programmen – und als .cube-LUT für alles andere.</p></div>
       <div class="panel b-foto reveal"><img src="assets/shot-foto.jpg" alt="UBGrade Foto-Edition" loading="lazy"><div><h3>Foto-Edition</h3><p>Die UBGrade App und der Photoshop-Filter für Bilder – in voller Auflösung, als Smartfilter wieder bearbeitbar.</p></div></div>
       <div class="panel b-scope reveal"><h3>Scopes &amp; False Color</h3><p>Waveform, RGB-Parade, Vektorskop und Histogramm direkt unterm Bild.</p></div>
       <div class="panel b-help reveal"><h3>Neu im Grading?</h3><p>Tutorial mit <b>(?)</b> direkt am Regler und eine <a class="tl" href="anleitung.html">Anfänger-Anleitung</a> mit 4 Starter-Looks.</p></div>
@@ -139,11 +145,11 @@
 <!-- DOWNLOAD -->
 <section class="sec" id="download">
   <div class="wrap">
-    <div class="panel dl reveal">
+    <div class="panel glowbox dl reveal">
       <div class="dl-head">
         <img class="dl-ico" src="assets/icon-192.png" alt="" width="96" height="96">
         <div>
-          <div class="eyebrow pink">UBGRADE 4.1.0 · BETA</div>
+          <div class="eyebrow">UBGRADE 4.1.0 · BETA</div>
           <h2>Kostenlos laden.</h2>
           <p>Solange die Beta läuft, für alle. Der Installer erkennt jede installierte Version von Premiere Pro, After Effects und Photoshop – du wählst, wo UBGrade landet. DaVinci Resolve, Adobe-Panel und App sind dabei, ein Uninstaller auch.</p>
         </div>
@@ -196,6 +202,21 @@
       </div>
       <div class="form-msg" id="bugMsg" role="status" aria-live="polite"></div>
     </form>
+  </div>
+</section>
+
+<!-- NÄCHSTES KAPITEL -->
+<section class="sec next" id="weiter">
+  <div class="wrap">
+    <a class="panel glowbox chap reveal" href="https://uniquebaby.de" target="_blank" rel="noopener">
+      <img src="assets/chap-home.jpg" alt="UNIQUEBABY – NICHT WIE IHR." loading="lazy" width="1480" height="760">
+      <div class="chap-in">
+        <div class="eyebrow">NÄCHSTES KAPITEL</div>
+        <h2>Zurück zu<br>UNIQUEBABY.</h2>
+        <p>UBGrade ist ein Projekt von UNIQUEBABY – Musik, Visuals und Design von unique. Alles andere findest du auf uniquebaby.de.</p>
+        <span class="btn">uniquebaby.de öffnen <i aria-hidden="true">↗</i></span>
+      </div>
+    </a>
   </div>
 </section>
 

@@ -23,7 +23,9 @@
   const arm = $('#pkArm'), flt = $('.pk-float'), root = document.documentElement;
   const hsl2hex = (h, s, l) => { s /= 100; l /= 100; const k = (n) => (n + h / 30) % 12, a = s * Math.min(l, 1 - l), f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1))); return '#' + [f(0), f(8), f(4)].map((x) => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase(); };
   let ang = 212, from = 212, to = 212, tA = 0, hold = 0;
-  const pick = (a) => { const h = ((a % 360) + 360) % 360; arm.style.setProperty('--ang', a + 'deg'); root.style.setProperty('--pick', `hsl(${h.toFixed(0)} 100% 60%)`); $('#pkHex').textContent = hsl2hex(h, 100, 60); $('#pkHsl').textContent = `H ${Math.round(h)}° · S 100 · L 60`; };
+  // --pick nur am Farbwähler setzen (nicht am :root) – sonst rechnet der Browser jede Frame die ganze Seite neu
+  const pkEl = $('#picker'), pkHex = $('#pkHex'), pkHsl = $('#pkHsl'); let lastH = -1;
+  const pick = (a) => { const h = ((a % 360) + 360) % 360, hr = Math.round(h); arm.style.setProperty('--ang', a.toFixed(2) + 'deg'); if (hr === lastH) return; lastH = hr; pkEl.style.setProperty('--pick', `hsl(${hr} 100% 60%)`); pkHex.textContent = hsl2hex(hr, 100, 60); pkHsl.textContent = `H ${hr}° · S 100 · L 60`; };
   const ringEl = $('.pk-ring'), knob = $('.pk-knob');
   const placeKnob = () => { const r = ringEl.offsetWidth / 2 - 23; knob.style.top = -(r + 26) + 'px'; };
   addEventListener('resize', placeKnob); placeKnob();
@@ -89,10 +91,16 @@
     look = i; dirty = true;
   }
   function setSplit(x) { split = Math.max(0, Math.min(1, x)); splitEl.style.left = split * 100 + '%'; dirty = true; }
+  // neues Videobild -> genau einmal graden (25 fps Video = 25 Renders statt 60/120 pro Sekunde)
+  const rvfc = 'requestVideoFrameCallback' in HTMLVideoElement.prototype;
+  let vfH = 0;
+  const onVF = () => { dirty = true; vfH = vid.requestVideoFrameCallback(onVF); };
+  const armVF = () => { if (!rvfc) return; if (vfH) vid.cancelVideoFrameCallback(vfH); vfH = vid.requestVideoFrameCallback(onVF); };
+  armVF(); vid.addEventListener('loadeddata', armVF);
   function frame() {
     requestAnimationFrame(frame);
     if (!E || !inView || vid.readyState < 2) return;
-    if (!vid.paused) dirty = true;
+    if (!vid.paused && !rvfc) dirty = true;
     if (!dirty) return; dirty = false;
     if (!E.setSource(vid)) return;
     const r = view.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
